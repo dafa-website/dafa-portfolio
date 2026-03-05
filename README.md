@@ -1,5 +1,4 @@
 # Dafa Rizqullah — Multimedia Designer Portfolio
-![Uploading screencapture-localhost-3000-2026-03-05-23_35_31 (1).png…]()
 
 A modern, cinematic portfolio website built for **Achmad Dafa Rizqullah**, a multimedia designer specializing in video editing, motion graphics, social media content, and graphic design. Features smooth scroll-reveal animations, a glassmorphism navbar, Instagram-style video showcase, and a fully integrated headless CMS.
 
