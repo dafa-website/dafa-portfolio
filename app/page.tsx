@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
+import SkillsMarquee from "@/components/sections/SkillsMarquee";
 import SelectedWorks from "@/components/sections/Gallery";
 import VideoReel from "@/components/sections/VideoReel";
 import AboutSection from "@/components/sections/About";
@@ -42,12 +43,14 @@ export default async function Home() {
         videoUrl={settings?.heroVideoUrl || about.heroVideoUrl}
       />
 
+      <SkillsMarquee />
+
       <SelectedWorks projects={projects} />
 
-      <VideoReel
+      {/* <VideoReel
         title="Video Works"
         subtitle="Short-form content, broadcast assets, and creative edits"
-      />
+      /> */}
 
       <AboutSection about={about} />
 
