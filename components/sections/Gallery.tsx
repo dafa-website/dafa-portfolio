@@ -13,13 +13,10 @@ const TARGET_CATEGORIES = ["Social Media", "Motion Graphics", "Video Editing"];
 const BENTO_CATEGORIES = ["Product Design", "Photography"];
 
 export default function SelectedWorks({ projects }: SelectedWorksProps) {
-    // Map our target categories to their spotlighted project
     const showcaseProjects = TARGET_CATEGORIES.map(category => {
-        // Try to find a featured project first
         let proj = projects.find(p => 
             p.featured && p.category?.toLowerCase() === category.toLowerCase()
         );
-        // Fallback to latest available project if no featured project exists
         if (!proj) {
             proj = projects.find(p => 
                 p.category?.toLowerCase() === category.toLowerCase()
@@ -34,6 +31,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
 
     return (
         <section id="works" className="relative py-28 md:py-36 bg-background">
+            <div className="section-divider mx-auto mb-28 max-w-7xl md:mb-36" />
             <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
                 
                 {/* Section Header */}
@@ -58,8 +56,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                 <div className="flex flex-col gap-32 md:gap-40">
                     {showcaseProjects.map((showcase, index) => {
                         const { categoryName, project } = showcase;
-                        
-                        // Alternating layout: index % 2 flips between left and right visuals
+                    
                         const isImageLeft = index % 2 !== 0;
 
                         return (
@@ -161,9 +158,6 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                 {/* 12-Image Bento Box Categories (`Product Design`, `Photography`) */}
                 <div className="flex flex-col gap-32 md:gap-40 mt-32 md:mt-40">
                     {BENTO_CATEGORIES.map((categoryName) => {
-
-                        // Dummy images array tailored to look absolutely stunning as a 12-item grid
-                        // Removed `fit=crop` to allow natural image aspect ratios to flow in the masonry layout
                         const dummyImages = [
                             categoryName === "Product Design" ? "https://images.unsplash.com/photo-1600100344415-325b34bc26d5?w=800" : "https://images.unsplash.com/photo-1542314831-c6a4d14eff3e?w=800",
                             categoryName === "Product Design" ? "https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?w=800" : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
@@ -202,8 +196,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                         </Link>
                                     </div>
 
-                                    {/* MASONRY GRID (12 IMAGES PURE VISUAL) */}
-                                    {/* Using CSS columns allows heights to dynamically flex based on the natural image aspect ratio */}
+                                    {/* MASONRY GRID */}
                                     <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 md:gap-4 mt-8 space-y-3 md:space-y-4">
                                         {Array.from({ length: 12 }).map((_, i) => {
                                             return (
@@ -215,13 +208,12 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                                         src={dummyImages[i]}
                                                         alt={`${categoryName} mockup ${i + 1}`}
                                                         width={800}
-                                                        height={800} // Required by Next/Image but immediately overridden below safely
+                                                        height={800}
                                                         sizes="(max-width: 768px) 100vw, 33vw"
-                                                        style={{ width: "100%", height: "auto" }} // Allows natural image height to control flow
+                                                        style={{ width: "100%", height: "auto" }} 
                                                         className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                                                     />
                                                     
-                                                    {/* Very subtle aesthetic dark wash over grid cells to blend tightly with dark aesthetics */}
                                                     <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent pointer-events-none" />
                                                 </div>
                                             );

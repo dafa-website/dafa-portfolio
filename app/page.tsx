@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import SkillsMarquee from "@/components/sections/SkillsMarquee";
 import SelectedWorks from "@/components/sections/Gallery";
+import CategoryOverview from "@/components/sections/CategoryOverview";
 import VideoReel from "@/components/sections/VideoReel";
 import AboutSection from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
@@ -44,6 +45,8 @@ export default async function Home() {
       />
 
       <SkillsMarquee />
+
+      <CategoryOverview />
 
       <SelectedWorks projects={projects} />
 
