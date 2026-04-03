@@ -14,7 +14,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
 
     return (
         <section id="about" className="relative py-4 md:py-8 bg-background">
-            <div className="section-divider mx-auto mb-28 max-w-7xl md:mb-36" />
+            <div className="section-divider mx-auto mb-12 max-w-7xl md:mb-16" />
 
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 <div className="grid items-start gap-12 md:grid-cols-[1fr_1.5fr] lg:gap-24">
