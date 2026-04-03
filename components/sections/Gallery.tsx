@@ -155,31 +155,34 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                     })}
                 </div>
 
-                {/* 12-Image Bento Box Categories (`Product Design`, `Photography`) */}
-                <div className="flex flex-col gap-32 md:gap-40 mt-32 md:mt-40">
+                {/* Bento Grid Categories (`Product Design`, `Photography`) */}
+                <div className="flex flex-col gap-28 md:gap-36 mt-28 md:mt-36">
                     {BENTO_CATEGORIES.map((categoryName) => {
-                        const dummyImages = [
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1600100344415-325b34bc26d5?w=800" : "https://images.unsplash.com/photo-1542314831-c6a4d14eff3e?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?w=800" : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800" : "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1582214300762-b4c4ba8380eb?w=800" : "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1503602642458-232111445657?w=800" : "https://images.unsplash.com/photo-1620288610736-1e96a4004944?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=800" : "https://images.unsplash.com/photo-1563914856001-c81bdf934ec7?w=800",
-                            // Repeat similar vibe for items 6-11
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=800" : "https://images.unsplash.com/photo-1506744626753-1fa7604ed429?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1550005973-5408ead48666?w=800" : "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800" : "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1481481600463-68ceea2819cd?w=800" : "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800" : "https://images.unsplash.com/photo-1419242902214-272b3f66ce7a?w=800",
-                            categoryName === "Product Design" ? "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?w=800" : "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+                        const images = categoryName === "Product Design" ? [
+                            { src: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=800&fit=crop", span: "col-span-2 row-span-2" },
+                            { src: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&h=400&fit=crop", span: "col-span-2 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                        ] : [
+                            { src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=800&fit=crop", span: "col-span-2 row-span-2" },
+                            { src: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop", span: "col-span-2 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
+                            { src: "https://images.unsplash.com/photo-1518173946687-a9ce5fd53553?w=600&h=600&fit=crop", span: "col-span-1 row-span-1" },
                         ];
 
                         return (
                             <ScrollReveal key={categoryName} delay={0.1}>
                                 <div className="w-full">
-                                    {/* Toolbar Top Left & Top Right of the category content */}
-                                    <div className="flex flex-col sm:flex-row items-center justify-between mb-10 pb-6 border-b border-border/50 gap-6">
-                                        {/* Meta Category Row (Left) */}
+                                    {/* Category toolbar */}
+                                    <div className="flex flex-col sm:flex-row items-center justify-between mb-8 pb-6 border-b border-border/50 gap-6">
                                         <div className="flex items-center flex-wrap gap-4 w-full sm:w-auto justify-start">
                                             <span className="flex h-1.5 w-1.5 rounded-full bg-accent"></span>
                                             <span className="text-sm font-bold uppercase tracking-widest text-accent">
@@ -187,7 +190,6 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                             </span>
                                         </div>
 
-                                        {/* Button View All right */}
                                         <Link
                                             href={`/#works`}
                                             className="inline-block w-full sm:w-auto text-center rounded-full border border-border px-8 py-3 text-[11px] font-medium uppercase tracking-[0.1em] text-foreground transition-all duration-300 hover:border-accent hover:text-accent shadow-sm"
@@ -196,28 +198,23 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                         </Link>
                                     </div>
 
-                                    {/* MASONRY GRID */}
-                                    <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 md:gap-4 mt-8 space-y-3 md:space-y-4">
-                                        {Array.from({ length: 12 }).map((_, i) => {
-                                            return (
-                                                <div 
-                                                    key={`${categoryName}-${i}`} 
-                                                    className="relative break-inside-avoid rounded-2xl md:rounded-[2rem] overflow-hidden bg-surface ring-1 ring-border/50 group"
-                                                >
-                                                    <Image
-                                                        src={dummyImages[i]}
-                                                        alt={`${categoryName} mockup ${i + 1}`}
-                                                        width={800}
-                                                        height={800}
-                                                        sizes="(max-width: 768px) 100vw, 33vw"
-                                                        style={{ width: "100%", height: "auto" }} 
-                                                        className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                                                    />
-                                                    
-                                                    <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent pointer-events-none" />
-                                                </div>
-                                            );
-                                        })}
+                                    {/* Bento grid */}
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] sm:auto-rows-[240px] lg:auto-rows-[220px] gap-2 sm:gap-3">
+                                        {images.map((img, i) => (
+                                            <div
+                                                key={`${categoryName}-${i}`}
+                                                className={`relative overflow-hidden rounded-lg sm:rounded-xl group ${img.span}`}
+                                            >
+                                                <Image
+                                                    src={img.src}
+                                                    alt={`${categoryName} work ${i + 1}`}
+                                                    fill
+                                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                                                />
+                                                <div className="absolute inset-0 bg-black/5 transition-colors duration-500 group-hover:bg-transparent pointer-events-none" />
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </ScrollReveal>

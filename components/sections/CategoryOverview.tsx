@@ -7,31 +7,31 @@ export default function CategoryOverview() {
     const categories = [
         {
             title: "Social Media",
-            icon: <Share2 className="w-5 h-5 text-accent" />,
+            icon: <Share2 className="w-5 h-5 text-foreground/70" />,
             description: "Crafting engaging campaigns and viral content strategies tailored to amplify brand presence and audience interaction.",
             className: "md:col-span-2 lg:col-span-2",
         },
         {
             title: "Motion Graphic",
-            icon: <Video className="w-5 h-5 text-emerald-500" />,
+            icon: <Video className="w-5 h-5 text-foreground/70" />,
             description: "Bringing static designs to life with fluid animations. I create dynamic visual narratives that capture attention.",
             className: "col-span-1",
         },
         {
             title: "Video Editing",
-            icon: <Film className="w-5 h-5 text-blue-500" />,
+            icon: <Film className="w-5 h-5 text-foreground/70" />,
             description: "From pacing to color grading, I construct compelling visual stories that resonate emotionally and drive deeper engagement.",
             className: "col-span-1",
         },
         {
             title: "Product Design",
-            icon: <PenTool className="w-5 h-5 text-purple-500" />,
+            icon: <PenTool className="w-5 h-5 text-foreground/70" />,
             description: "Applying human-centered design principles to build intuitive, aesthetically pleasing digital products and user experiences.",
             className: "col-span-1",
         },
         {
             title: "Photography",
-            icon: <Camera className="w-5 h-5 text-orange-500" />,
+            icon: <Camera className="w-5 h-5 text-foreground/70" />,
             description: "Capturing high-quality, evocative imagery. I focus on lighting, composition, and mood to deliver striking visual assets.",
             className: "md:col-span-2 lg:col-span-1",
         }

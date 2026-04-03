@@ -8,8 +8,8 @@
   --color-background: #0a0a0a;
   --color-foreground: #fafafa;
   --color-muted: #71717a;
-  --color-accent: #c9a96e;
-  --color-accent-light: #e0c891;
+  --color-accent: #fafafa;
+  --color-accent-light: #ffffff;
   --color-card: #141414;
   --color-card-hover: #1a1a1a;
   --color-border: #262626;
@@ -196,11 +196,9 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Text gradient */
+/* Text gradient — monochromatic shimmer */
 .text-gradient {
-  background: linear-gradient(135deg,
-      var(--color-accent),
-      var(--color-accent-light));
+  background: linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
