@@ -30,6 +30,17 @@ export interface Project {
   featured: boolean;
 }
 
+export interface JobExperience {
+  _id: string;
+  role: string;
+  company: string;
+  location?: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  skills: string[];
+}
+
 export interface About {
   _id: string;
   name: string;
@@ -41,6 +52,7 @@ export interface About {
   socialLinks: SocialLink[];
   experience?: string;
   location?: string;
+  jobs?: JobExperience[];
 }
 
 export interface SiteSettings {

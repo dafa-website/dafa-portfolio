@@ -4,6 +4,7 @@ import SkillsMarquee from "@/components/sections/SkillsMarquee";
 import SelectedWorks from "@/components/sections/Gallery";
 import CategoryOverview from "@/components/sections/CategoryOverview";
 // import AboutSection from "@/components/sections/About";
+// import ExperienceSection from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
@@ -58,6 +59,7 @@ export default async function Home() {
       /> */}
 
       {/* <AboutSection about={about} /> */}
+      {/* <ExperienceSection jobs={about.jobs || []} /> */}
 
       <Contact />
 

@@ -6,10 +6,9 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Works", href: "#works" },
-  // { label: "Reel", href: "#reel" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Works", href: "/#works" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 interface NavbarProps {
@@ -45,7 +44,7 @@ export default function Navbar({ photographerName = "DAFA" }: NavbarProps) {
         {/* Right side: CTA Button & Mobile Toggle mapped to true top-right corner */}
         <div className="absolute right-4 top-1/2 z-50 flex -translate-y-1/2 items-center gap-3 sm:right-6 lg:right-12">
           <a
-            href="#contact"
+            href="/#contact"
             className="hidden items-center justify-center rounded-full bg-accent px-6 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-background shadow-lg transition-transform duration-500 hover:scale-105 md:flex"
           >
             Get in Touch
@@ -145,7 +144,7 @@ export default function Navbar({ photographerName = "DAFA" }: NavbarProps) {
             }}
           >
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => setMobileOpen(false)}
               className="mt-4 inline-block rounded-full border border-accent px-8 py-3 text-sm font-medium uppercase tracking-[0.2em] text-accent transition-all duration-300 hover:bg-accent hover:text-background"
             >
