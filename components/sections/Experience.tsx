@@ -21,7 +21,7 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                     <div className="text-center mb-16 md:mb-24">
                         <h2
                             className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl"
-                            style={{ fontFamily: "var(--font-display)" }}
+                            style={{ fontFamily: "var(--font-montserrat)" }}
                         >
                             Professional Experience
                         </h2>

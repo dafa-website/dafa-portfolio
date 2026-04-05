@@ -32,7 +32,7 @@ async function getData() {
 }
 
 export default async function Home() {
-  const { projects, about, settings } = await getData();
+  const { about, settings } = await getData();
 
   return (
     <main>
@@ -51,7 +51,7 @@ export default async function Home() {
 
       <CategoryOverview />
 
-      <SelectedWorks projects={projects} />
+      <SelectedWorks />
 
       {/* <VideoReel
         title="Video Works"

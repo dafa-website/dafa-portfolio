@@ -60,7 +60,7 @@ export default function ProjectCard({
                 <div className="absolute inset-x-0 bottom-0 z-10 translate-y-2 p-5 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
                     <h3
                         className="mb-1 text-lg font-semibold text-white md:text-xl"
-                        style={{ fontFamily: "var(--font-display)" }}
+                        style={{ fontFamily: "var(--font-montserrat)" }}
                     >
                         {project.title}
                     </h3>

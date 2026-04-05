@@ -46,12 +46,12 @@ export default function CategoryOverview() {
                     <div className="mb-16 md:mb-20 text-center flex flex-col items-center">
                         <h2
                             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6"
-                            style={{ fontFamily: "var(--font-display)" }} 
+                            style={{ fontFamily: "var(--font-montserrat)" }} 
                         >
-                            Multidisciplinary Expertise
+                            Built for brands worth remembering.
                         </h2>
                         <p className="max-w-2xl text-base md:text-lg text-muted font-medium">
-                            Transforming brand concepts into high-impact digital realities through expertly crafted visuals, motion, and design.
+                            A curated selection of projects across video, motion, and visual design.
                         </p>
                     </div>
                 </ScrollReveal>

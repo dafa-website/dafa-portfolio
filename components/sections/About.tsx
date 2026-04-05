@@ -78,7 +78,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                         <ScrollReveal delay={0.3}>
                             <h2
                                 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-                                style={{ fontFamily: "var(--font-display)" }}
+                                style={{ fontFamily: "var(--font-montserrat)" }}
                             >
                                 Turning complex ideas <br /> into <span className="text-foreground/70 italic">elegant solutions.</span>
                             </h2>
@@ -123,7 +123,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                                     <div>
                                         <h4 className="font-semibold text-foreground">Empathy-Driven Content</h4>
                                         <p className="mt-2 text-sm leading-relaxed text-muted">
-                                            Every piece of content is an opportunity to solve a user's pain point or tell a compelling story. I bridge the gap between business goals and audience delight.
+                                            Every piece of content is an opportunity to solve a user&apos;s pain point or tell a compelling story. I bridge the gap between business goals and audience delight.
                                         </p>
                                     </div>
                                 </div>

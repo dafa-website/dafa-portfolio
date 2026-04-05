@@ -28,7 +28,7 @@ export default function Contact({
                 <ScrollReveal delay={0.15}>
                     <h2
                         className="mx-auto max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
-                        style={{ fontFamily: "var(--font-display)" }}
+                        style={{ fontFamily: "var(--font-montserrat)" }}
                     >
                         Let&apos;s Create
                         <br />

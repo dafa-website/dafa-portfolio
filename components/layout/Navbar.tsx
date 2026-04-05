@@ -126,7 +126,7 @@ export default function Navbar({ photographerName = "DAFA" }: NavbarProps) {
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="text-2xl font-light uppercase tracking-[0.3em] text-foreground transition-colors hover:text-accent"
-                style={{ fontFamily: "var(--font-display)" }}
+                style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 {link.label}
               </a>
