@@ -1,18 +1,4 @@
-import { Instagram, Linkedin } from "lucide-react";
-
-
-
-const footerLinks = [
-    { label: "Works", href: "#works" },
-    { label: "Reel", href: "#reel" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
-];
-
-const socialLinks = [
-    { icon: <Instagram size={16} />, href: "https://instagram.com/dafarizqullah", label: "Instagram" },
-    { icon: <Linkedin size={16} />, href: "https://www.linkedin.com/in/dafarizqullah", label: "LinkedIn" },
-];
+import { FOOTER_LINKS, SOCIAL_LINKS } from "@/data/site";
 
 interface FooterProps {
     photographerName?: string;
@@ -33,7 +19,7 @@ export default function Footer({ photographerName = "Dafa Rizqullah" }: FooterPr
                     </a>
 
                     <ul className="flex items-center gap-6">
-                        {footerLinks.map((link) => (
+                        {FOOTER_LINKS.map((link) => (
                             <li key={link.href}>
                                 <a
                                     href={link.href}
@@ -46,18 +32,21 @@ export default function Footer({ photographerName = "Dafa Rizqullah" }: FooterPr
                     </ul>
 
                     <div className="flex items-center gap-3">
-                        {socialLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={link.label}
-                                className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-accent"
-                            >
-                                {link.icon}
-                            </a>
-                        ))}
+                        {SOCIAL_LINKS.map((link) => {
+                            const Icon = link.icon;
+                            return (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={link.label}
+                                    className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-accent"
+                                >
+                                    <Icon size={16} />
+                                </a>
+                            );
+                        })}
                     </div>
                 </div>
 

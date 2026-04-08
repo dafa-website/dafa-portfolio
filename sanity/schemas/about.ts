@@ -80,6 +80,28 @@ export default defineType({
                 },
             ],
         }),
+        defineField({
+            name: "jobs",
+            title: "Work Experience / Jobs",
+            type: "array",
+            of: [
+                {
+                    type: "object",
+                    fields: [
+                        defineField({ name: "role", title: "Role", type: "string", validation: (Rule) => Rule.required() }),
+                        defineField({ name: "company", title: "Company", type: "string", validation: (Rule) => Rule.required() }),
+                        defineField({ name: "location", title: "Location", type: "string" }),
+                        defineField({ name: "startDate", title: "Start Date", type: "string" }),
+                        defineField({ name: "endDate", title: "End Date", type: "string" }),
+                        defineField({ name: "description", title: "Description", type: "text" }),
+                        defineField({ name: "skills", title: "Skills", type: "array", of: [{ type: "string" }] }),
+                    ],
+                    preview: {
+                        select: { title: "role", subtitle: "company" },
+                    },
+                },
+            ],
+        }),
     ],
     preview: {
         select: { title: "name", subtitle: "tagline" },

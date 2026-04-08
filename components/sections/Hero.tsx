@@ -2,20 +2,27 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { HERO_COPY } from "@/data/home";
 
 interface HeroProps {
-    name?: string;
-    bio?: string;
-    ctaText?: string;
-    ctaLink?: string;
-    cvUrl?: string;
+    lineOne?: string;
+    lineTwoPrefix?: string;
+    lineTwoEmphasis?: string;
     tagline?: string;
+    descriptionLead?: string;
+    descriptionEmphasis?: string;
+    descriptionTail?: string;
     videoUrl?: string;
-    location?: string;
-    experience?: string;
 }
 
 export default function Hero({
+    lineOne = HERO_COPY.lineOne,
+    lineTwoPrefix = HERO_COPY.lineTwoPrefix,
+    lineTwoEmphasis = HERO_COPY.lineTwoEmphasis,
+    tagline = HERO_COPY.tagline,
+    descriptionLead = HERO_COPY.descriptionLead,
+    descriptionEmphasis = HERO_COPY.descriptionEmphasis,
+    descriptionTail = HERO_COPY.descriptionTail,
     videoUrl,
 }: HeroProps) {
     return (
@@ -77,8 +84,11 @@ export default function Hero({
                             className="text-[clamp(3.5rem,7vw,6.5rem)] font-bold leading-[1.1] tracking-tight text-white"
                             style={{ fontFamily: "var(--font-montserrat)" }}
                         >
-                            Your brand <br />
-                            has a <span className="italic font-light text-white/90" style={{ fontFamily: "var(--font-fraunces)" }}>story</span>
+                            {lineOne} <br />
+                            {lineTwoPrefix}{" "}
+                            <span className="italic font-light text-white/90" style={{ fontFamily: "var(--font-fraunces)" }}>
+                                {lineTwoEmphasis}
+                            </span>
                         </h1>
                     </motion.div>
 
@@ -89,7 +99,7 @@ export default function Hero({
                         transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="mt-7 text-lg font-medium tracking-wide text-white/90 sm:text-xl md:text-2xl"
                     >
-                        Let&apos;s make sure people actually remember it.
+                        {tagline}
                     </motion.p>
 
                     {/* Bio + stats */}
@@ -100,7 +110,9 @@ export default function Hero({
                         className="mt-8 max-w-xl"
                     >
                         <p className="text-base leading-8 text-white/80 sm:text-lg">
-                            Every business has something worth saying. <strong className="font-bold text-white">The problem is most of it gets lost in content that blends in. I help brands</strong> cut through that with visuals and creative direction that are built to be remembered, not just scrolled past.
+                            {descriptionLead}{" "}
+                            <strong className="font-bold text-white">{descriptionEmphasis}</strong>{" "}
+                            {descriptionTail}
                         </p>
                     </motion.div>
                 </div>

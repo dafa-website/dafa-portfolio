@@ -41,7 +41,7 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                             const isLeftCard = index % 2 === 0;
 
                             return (
-                                <div key={job._id} className="relative flex flex-col md:flex-row items-center justify-center md:h-auto md:min-h-[280px]">
+                                <div key={job._key || index} className="relative flex flex-col md:flex-row items-center justify-center md:h-auto md:min-h-[280px]">
                                     
                                     {/* Mobile Date (shows only on mobile) */}
                                     <div className="md:hidden flex items-center self-start mb-4 gap-2 text-xs font-semibold text-muted bg-[#1a1a1a] px-3 py-1.5 rounded-full border border-white/5">

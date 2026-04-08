@@ -24,17 +24,19 @@ export default defineType({
             type: "string",
             options: {
                 list: [
-                    { title: "Portrait", value: "Portrait" },
-                    { title: "Fashion", value: "Fashion" },
-                    { title: "Landscape", value: "Landscape" },
-                    { title: "Street", value: "Street" },
-                    { title: "Documentary", value: "Documentary" },
-                    { title: "Product", value: "Product" },
-                    { title: "Wedding", value: "Wedding" },
-                    { title: "Editorial", value: "Editorial" },
+                    { title: "Video Editing", value: "Video Editing" },
+                    { title: "Graphic Design", value: "Graphic Design" },
+                    { title: "AI Product Photography", value: "AI Product Photography" },
                 ],
             },
             validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: "tags",
+            title: "Tags",
+            type: "array",
+            of: [{ type: "string" }],
+            options: { layout: "tags" },
         }),
         defineField({
             name: "description",

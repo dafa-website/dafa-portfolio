@@ -6,6 +6,7 @@ export const projectsQuery = `
     slug,
     category,
     description,
+    tags,
     coverImage,
     videoUrl,
     client,
@@ -21,6 +22,7 @@ export const featuredProjectsQuery = `
     slug,
     category,
     description,
+    tags,
     coverImage,
     videoUrl,
     client,
@@ -36,6 +38,7 @@ export const projectBySlugQuery = `
     slug,
     category,
     description,
+    tags,
     coverImage,
     images,
     videoUrl,
@@ -55,7 +58,8 @@ export const aboutQuery = `
     heroVideoUrl,
     socialLinks,
     experience,
-    location
+    location,
+    jobs
   }
 `;
 

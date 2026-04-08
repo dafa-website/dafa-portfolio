@@ -3,8 +3,7 @@ import Hero from "@/components/sections/Hero";
 import SkillsMarquee from "@/components/sections/SkillsMarquee";
 import SelectedWorks from "@/components/sections/Gallery";
 import CategoryOverview from "@/components/sections/CategoryOverview";
-// import AboutSection from "@/components/sections/About";
-// import ExperienceSection from "@/components/sections/Experience";
+import AboutPreview from "@/components/sections/AboutPreview";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
@@ -32,34 +31,24 @@ async function getData() {
 }
 
 export default async function Home() {
-  const { about, settings } = await getData();
+  const { projects, about, settings } = await getData();
+  const heroVideoUrl = settings?.heroVideoUrl || about.heroVideoUrl;
 
   return (
     <main>
       <Navbar photographerName={about.name?.toUpperCase()} />
 
       <Hero
-        name={about.name}
-        tagline={about.tagline}
-        bio={about.bio}
-        location={about.location}
-        experience={about.experience}
-        videoUrl={settings?.heroVideoUrl || about.heroVideoUrl}
+        videoUrl={heroVideoUrl}
       />
 
       <SkillsMarquee />
 
       <CategoryOverview />
 
-      <SelectedWorks />
+      <SelectedWorks projects={projects} />
 
-      {/* <VideoReel
-        title="Video Works"
-        subtitle="Short-form content, broadcast assets, and creative edits"
-      /> */}
-
-      {/* <AboutSection about={about} /> */}
-      {/* <ExperienceSection jobs={about.jobs || []} /> */}
+      <AboutPreview />
 
       <Contact />
 

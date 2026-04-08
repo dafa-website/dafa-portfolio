@@ -3,95 +3,203 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { SHOWCASE_DATA } from "@/constants/portfolio";
+import type { Project } from "@/types";
+import { urlFor, isSanityConfigured } from "@/lib/sanity";
+import { WORK_CATEGORIES_ORDER } from "@/data/home";
 
-export default function SelectedWorks() {
+interface SelectedWorksProps {
+    projects: Project[];
+}
+
+export default function SelectedWorks({ projects }: SelectedWorksProps) {
+    if (!projects || projects.length === 0) return null;
+
+    // Group projects by category
+    const groupedProjects = projects.reduce((acc, project) => {
+        const cat = project.category || "Uncategorized";
+        if (!acc[cat]) {
+            acc[cat] = [];
+        }
+        acc[cat].push(project);
+        return acc;
+    }, {} as Record<string, Project[]>);
+
     return (
-        <section id="works" className="relative py-28 md:py-36 bg-background">
-            <div className="section-divider mx-auto mb-28 max-w-7xl md:mb-36" />
-            <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <section id="works" className="relative py-28 md:py-36 bg-black">
+            <div className="mx-auto max-w-6xl px-6 lg:px-12">
                 
                 {/* Section Header */}
                 <ScrollReveal>
-                    <div className="mb-20 md:mb-32 text-center">
+                    <div className="mb-24 md:mb-32 text-center">
                         <h1
-                            className="text-5xl font-bold tracking-tighter text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+                            className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
                             style={{ fontFamily: "var(--font-montserrat)" }}
                         >
-                            Exactly What I Do
+                            Explore What I Do
                         </h1>
                     </div>
                 </ScrollReveal>
 
                 {/* Vertically Stacked Categories */}
                 <div className="flex flex-col gap-32 md:gap-40">
-                    {SHOWCASE_DATA.map((project, index) => (
-                        <div key={project.category} className="w-full flex flex-col gap-12 md:gap-16">
-                            {/* Category Headings */}
-                            <ScrollReveal delay={0.1}>
-                                <h2
-                                    className="text-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white uppercase"
-                                    style={{ fontFamily: "var(--font-montserrat)" }}
-                                >
-                                    {project.category}
-                                </h2>
-                            </ScrollReveal>
+                    {WORK_CATEGORIES_ORDER
+                        .filter(category => groupedProjects[category] && groupedProjects[category].length > 0)
+                        .map((category, catIndex) => {
+                        const catProjects = groupedProjects[category];
+                        const catLower = category.toLowerCase();
+                        const isVisualHeavy = catLower.includes("graphic") || 
+                                              catLower.includes("photography") ||
+                                              catLower.includes("photo") ||
+                                              catLower.includes("design");
 
-                            <ScrollReveal delay={0.2}>
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-                                    
-                                    {/* Text Column */}
-                                    <div className="flex flex-col justify-center h-full order-2 lg:order-1 lg:col-span-5">
-                                        <h3 
-                                            className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6"
-                                            style={{ fontFamily: "var(--font-montserrat)" }}
-                                        >
-                                            {project.title}
-                                        </h3>
+                        return (
+                            <div key={category} className="w-full flex flex-col gap-12 md:gap-16">
+                                {/* Category Heading */}
+                                <ScrollReveal delay={0.1}>
+                                    <h3
+                                        className="text-center text-sm md:text-md font-bold tracking-widest text-white uppercase"
+                                        style={{ fontFamily: "var(--font-montserrat)" }}
+                                    >
+                                        {category}
+                                    </h3>
+                                </ScrollReveal>
 
-                                        <p className="text-sm md:text-base text-white/80 max-w-xl leading-relaxed mb-8">
-                                            {project.description}
-                                        </p>
-                                        
-                                        <div className="mt-2">
+                                <div className="flex flex-col gap-20 md:gap-28">
+                                    {catProjects.map((project, index) => {
+                                        const tags = project.tags ?? [];
+                                        const imageUrl = project.coverImageUrl || 
+                                            (project.coverImage && isSanityConfigured ? urlFor(project.coverImage).url() : 
+                                            "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop");
+
+                                        if (isVisualHeavy) {
+                                            // ----------------- Graphic / Visual Layout (Full width) -----------------
+                                            return (
+                                                <ScrollReveal key={project._id || index} delay={0.2}>
+                                                    <div className="w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden border-y border-white/10 bg-[#111] cursor-pointer group shadow-2xl">
+                                                        <div className="relative w-full aspect-[4/3] md:aspect-[21/9] flex items-center justify-center">
+                                                             
+                                                             {/* Blurred Background Copy */}
+                                                             <Image
+                                                                 src={imageUrl}
+                                                                 alt={`${project.title} background`}
+                                                                 fill
+                                                                 className="object-cover opacity-30 blur-2xl scale-110 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+                                                             />
+
+                                                             {/* Main Image Container */}
+                                                             <div className="absolute inset-4 md:inset-x-[10vw] lg:inset-x-[15vw] md:inset-y-8">
+                                                                <Image
+                                                                    src={imageUrl}
+                                                                    alt={project.title}
+                                                                    fill
+                                                                    sizes="100vw"
+                                                                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-[1.02]"
+                                                                    priority={index === 0 && catIndex === 0}
+                                                                />
+                                                             </div>
+
+                                                        </div>
+                                                        {/* Text overlay for visual heavy */}
+                                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 backdrop-blur-md pointer-events-none">
+                                                            <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-center">
+                                                                <h3 className="text-2xl md:text-5xl font-extrabold text-white tracking-widest uppercase mb-4 drop-shadow-lg">
+                                                                    {project.title}
+                                                                </h3>
+                                                                {project.description && (
+                                                                    <p className="text-sm md:text-lg text-gray-300 max-w-3xl mx-auto font-medium tracking-wide">
+                                                                        {project.description}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ScrollReveal>
+                                            );
+                                        }
+
+                                        // ----------------- Standard / Video Layout (Text Left / Visual Right) -----------------
+                                        return (
+                                            <ScrollReveal key={project._id || index} delay={0.2}>
+                                                <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center md:items-stretch group h-full">
+                                                    
+                                                    {/* Text Column */}
+                                                    <div className="flex flex-col justify-center w-full md:w-5/12 py-4">
+                                                        {tags.length > 0 && (
+                                                            <div className="mb-6 flex flex-wrap gap-2">
+                                                                {tags.map((tag) => (
+                                                                    <span
+                                                                        key={`${project._id}-${tag}`}
+                                                                        className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] font-semibold tracking-wide text-white/70"
+                                                                    >
+                                                                        {tag}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                        
+                                                        <h3 
+                                                            className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-6 uppercase leading-none"
+                                                            style={{ fontFamily: "var(--font-montserrat)" }}
+                                                        >
+                                                            {project.title}
+                                                        </h3>
+
+                                                        <p className="text-[11px] md:text-[13px] text-gray-300 leading-loose text-justify font-medium mb-8">
+                                                            {project.description}
+                                                        </p>
+                                                        
+                                                        <div className="w-full h-[1px] bg-white/20 mt-auto" />
+                                                    </div>
+
+                                                    {/* Visual Column */}
+                                                    <div className="w-full md:w-7/12 flex md:justify-end items-center">
+                                                        <div className="relative bg-[#1a1a1a] rounded-[24px] p-1 md:p-2 w-full max-w-[550px] aspect-[16/10] flex items-center justify-center border-[0.5px] border-white/5 shadow-2xl transition-all duration-300 hover:border-white/15 hover:bg-[#222]">
+                                                            
+                                                            {/* Media Container */}
+                                                            <div className="relative w-full h-full rounded-md md:rounded-[12px] overflow-hidden bg-black flex items-center justify-center shadow-inner cursor-pointer">
+                                                                <Image
+                                                                    src={imageUrl}
+                                                                    alt={project.title}
+                                                                    fill
+                                                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                                                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                                                />
+
+                                                                {/* Play Button Overlay */}
+                                                                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/40 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="ml-1 opacity-90">
+                                                                            <polygon points="5,3 19,12 5,21" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </ScrollReveal>
+                                        );
+                                    })}
+                                </div>
+                                
+                                {/* View More Button */}
+                                {!isVisualHeavy && (
+                                    <ScrollReveal delay={0.3}>
+                                        <div className="mt-8 flex justify-start">
                                             <Link
                                                 href={`/#works`}
-                                                className="group relative inline-flex items-center justify-center rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md px-8 py-3 text-sm sm:text-base font-medium text-white transition-all duration-500 hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                                                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-transparent px-6 py-2 md:px-8 md:py-2.5 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-white/10 hover:border-white/60"
                                             >
-                                                <span className="relative z-10">View All {project.category.toLowerCase()} project</span>
-                                                {/* Glow effect */}
-                                                <div className="pointer-events-none absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                                view more {category.toLowerCase()} projects
                                             </Link>
                                         </div>
-                                    </div>
-
-                                    {/* Visual Column */}
-                                    <div className="relative w-full aspect-video rounded-3xl border border-white/20 overflow-hidden bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center order-1 lg:order-2 lg:col-span-7 shadow-2xl">
-                                        {/* Play Button Overlay */}
-                                        <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-                                            <div className="w-16 h-16 rounded-full border-2 border-white/60 flex items-center justify-center bg-black/20 backdrop-blur-md transition-transform duration-300 hover:scale-110">
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" className="ml-1">
-                                                    <polygon points="5,3 19,12 5,21" />
-                                                </svg>
-                                            </div>
-                                        </div>
-
-                                        <div className="absolute inset-0 w-full h-full opacity-80 hover:opacity-100 transition-opacity duration-500">
-                                            <Image
-                                                src={project.imageUrl}
-                                                alt={project.title}
-                                                fill
-                                                sizes="(max-width: 1024px) 100vw, 60vw"
-                                                className="object-cover"
-                                                priority={index === 0}
-                                            />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </ScrollReveal>
-                        </div>
-                    ))}
+                                    </ScrollReveal>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
 
             </div>

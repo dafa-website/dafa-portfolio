@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { ABOUT_PREVIEW_COPY } from "@/data/home";
 import type { About } from "@/types";
 import { MapPin, Briefcase, User, Sparkles, Heart, Rocket } from "lucide-react";
 
@@ -10,7 +11,7 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ about }: AboutSectionProps) {
-    const imageUrl = "/images/hero-profile.png";
+    const imageUrl = "/images/aboutme.png";
 
     return (
         <section id="about" className="relative py-4 md:py-8 bg-background">
@@ -71,7 +72,10 @@ export default function AboutSection({ about }: AboutSectionProps) {
                         <ScrollReveal delay={0.2}>
                             <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                                 <User size={14} />
-                                <span>Behind The Creator</span>
+                                <span>
+                                    {ABOUT_PREVIEW_COPY.headingLineOne}{" "}
+                                    {ABOUT_PREVIEW_COPY.headingLineTwo}
+                                </span>
                             </div>
                         </ScrollReveal>
 
@@ -80,13 +84,13 @@ export default function AboutSection({ about }: AboutSectionProps) {
                                 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
                                 style={{ fontFamily: "var(--font-montserrat)" }}
                             >
-                                Turning complex ideas <br /> into <span className="text-foreground/70 italic">elegant solutions.</span>
+                                {ABOUT_PREVIEW_COPY.intro}
                             </h2>
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.4}>
                             <p className="max-w-2xl text-base leading-relaxed text-muted">
-                                {about.bio}
+                                {ABOUT_PREVIEW_COPY.subtitle} {ABOUT_PREVIEW_COPY.body}
                             </p>
                         </ScrollReveal>
 

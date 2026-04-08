@@ -18,10 +18,27 @@ export const mockProjects: Project[] = [
         featured: true,
     },
     {
+        _id: "ai-product-1",
+        title: "Katalis Brand AI",
+        slug: { current: "katalis-brand-ai" },
+        category: "AI Product Photography",
+        description:
+            "Creating stunning product visuals without a physical photo shoot. We utilized advanced Generative AI to map out the ideal studio environment, lighting, and textures to bring out the product's natural appeal.",
+        coverImageUrl:
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop",
+        imageUrls: [
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=800&fit=crop",
+        ],
+        client: "Katalis Brand",
+        year: "2024",
+        featured: true,
+    },
+    {
         _id: "2",
         title: "Taulany TV — Viral Promos",
         slug: { current: "taulany-tv-promos" },
         category: "Video Editing",
+        tags: ["YouTube", "TikTok"],
         description:
             "Produced viral short-form content for Instagram & TikTok, accumulating over 5M+ views within 3 days. Enhanced top-tier programs with comedic graphic effects.",
         coverImageUrl:

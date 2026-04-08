@@ -20,6 +20,7 @@ export interface Project {
   slug: { current: string };
   category: string;
   description: string;
+  tags?: string[];
   coverImage?: SanityImage;
   coverImageUrl?: string; 
   images?: SanityImage[];
@@ -31,7 +32,7 @@ export interface Project {
 }
 
 export interface JobExperience {
-  _id: string;
+  _key?: string;
   role: string;
   company: string;
   location?: string;
