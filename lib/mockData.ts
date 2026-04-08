@@ -137,7 +137,7 @@ export const mockAbout: About = {
     ],
     jobs: [
         {
-            _id: "job-1",
+            _key: "job-1",
             role: "Video Editor & Social Media",
             company: "Taulany TV & Katalis Digital",
             location: "Jakarta, ID",
@@ -147,7 +147,7 @@ export const mockAbout: About = {
             skills: ["Premiere Pro", "After Effects", "Social Media Strategy", "TikTok"],
         },
         {
-            _id: "job-2",
+            _key: "job-2",
             role: "Photo Retoucher",
             company: "Photo2Post",
             location: "Italy (Remote)",
@@ -157,7 +157,7 @@ export const mockAbout: About = {
             skills: ["Photoshop", "Lightroom", "Color Grading", "Retouching"],
         },
         {
-            _id: "job-3",
+            _key: "job-3",
             role: "Motion Graphic Designer",
             company: "NRB TV",
             location: "Depok, ID",
@@ -167,7 +167,7 @@ export const mockAbout: About = {
             skills: ["After Effects", "Illustrator", "Motion Graphics", "Broadcast Design"],
         },
         {
-            _id: "job-4",
+            _key: "job-4",
             role: "Content Creator",
             company: "Locita Decoration & Homuni",
             location: "Jakarta, ID",
@@ -177,7 +177,7 @@ export const mockAbout: About = {
             skills: ["Content Creation", "Graphic Design", "Photography", "Video Editing"],
         },
         {
-            _id: "job-5",
+            _key: "job-5",
             role: "Graphic Design Intern",
             company: "PT. Toyota Motor Manufacturing Indonesia",
             location: "Jakarta, ID",
