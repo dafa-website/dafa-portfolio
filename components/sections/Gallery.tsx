@@ -1,14 +1,102 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import type { Project } from "@/types";
 import { urlFor, isSanityConfigured } from "@/lib/sanity";
 import { WORK_CATEGORIES_ORDER } from "@/data/home";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface SelectedWorksProps {
     projects: Project[];
+}
+
+interface VisualProjectCarouselProps {
+    project: Project;
+    fallbackUrl: string;
+    priority?: boolean;
+}
+
+function resolveProjectImages(project: Project, fallbackUrl: string) {
+    if (project.imageUrls && project.imageUrls.length > 0) return project.imageUrls;
+
+    if (project.images && project.images.length > 0 && isSanityConfigured) {
+        return project.images.map((image) =>
+            urlFor(image).width(1600).height(900).fit("crop").url(),
+        );
+    }
+
+    return [fallbackUrl];
+}
+
+function VisualProjectCarousel({
+    project,
+    fallbackUrl,
+    priority = false,
+}: VisualProjectCarouselProps) {
+    const images = resolveProjectImages(project, fallbackUrl);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const currentUrl = images[activeIndex] ?? fallbackUrl;
+    const hasMultiple = images.length > 1;
+
+    const handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    const handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setActiveIndex((prev) => (prev + 1) % images.length);
+    };
+
+    return (
+        <div className="relative w-full aspect-[4/3] md:aspect-[21/9] flex items-center justify-center">
+            {/* Blurred Background Copy */}
+            <Image
+                src={currentUrl}
+                alt={`${project.title} background`}
+                fill
+                className="object-cover opacity-30 blur-2xl scale-110 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+            />
+
+            {/* Main Image Container */}
+            <div className="absolute inset-4 md:inset-x-[10vw] lg:inset-x-[15vw] md:inset-y-8">
+                <Image
+                    src={currentUrl}
+                    alt={project.title}
+                    fill
+                    sizes="100vw"
+                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-[1.02]"
+                    priority={priority}
+                />
+            </div>
+
+            {hasMultiple && (
+                <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-8">
+                    <button
+                        type="button"
+                        onClick={handlePrev}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60"
+                        aria-label="Previous image"
+                    >
+                        <ChevronLeft size={18} />
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleNext}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60"
+                        aria-label="Next image"
+                    >
+                        <ChevronRight size={18} />
+                    </button>
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default function SelectedWorks({ projects }: SelectedWorksProps) {
@@ -51,6 +139,10 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                               catLower.includes("photography") ||
                                               catLower.includes("photo") ||
                                               catLower.includes("design");
+                        const viewMoreHref =
+                            category === "Video Editing"
+                                ? "/projects/video-editing"
+                                : "/#works";
 
                         return (
                             <div key={category} className="w-full flex flex-col gap-12 md:gap-16">
@@ -76,29 +168,11 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                             return (
                                                 <ScrollReveal key={project._id || index} delay={0.2}>
                                                     <div className="w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden border-y border-white/10 bg-[#111] cursor-pointer group shadow-2xl">
-                                                        <div className="relative w-full aspect-[4/3] md:aspect-[21/9] flex items-center justify-center">
-                                                             
-                                                             {/* Blurred Background Copy */}
-                                                             <Image
-                                                                 src={imageUrl}
-                                                                 alt={`${project.title} background`}
-                                                                 fill
-                                                                 className="object-cover opacity-30 blur-2xl scale-110 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
-                                                             />
-
-                                                             {/* Main Image Container */}
-                                                             <div className="absolute inset-4 md:inset-x-[10vw] lg:inset-x-[15vw] md:inset-y-8">
-                                                                <Image
-                                                                    src={imageUrl}
-                                                                    alt={project.title}
-                                                                    fill
-                                                                    sizes="100vw"
-                                                                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-[1.02]"
-                                                                    priority={index === 0 && catIndex === 0}
-                                                                />
-                                                             </div>
-
-                                                        </div>
+                                                        <VisualProjectCarousel
+                                                            project={project}
+                                                            fallbackUrl={imageUrl}
+                                                            priority={index === 0 && catIndex === 0}
+                                                        />
                                                         {/* Text overlay for visual heavy */}
                                                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 backdrop-blur-md pointer-events-none">
                                                             <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-center">
@@ -120,7 +194,11 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                         // ----------------- Standard / Video Layout (Text Left / Visual Right) -----------------
                                         return (
                                             <ScrollReveal key={project._id || index} delay={0.2}>
-                                                <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center md:items-stretch group h-full">
+                                                <Link
+                                                    href={`/projects/${project.slug.current}`}
+                                                    className="flex flex-col md:flex-row gap-12 md:gap-16 items-center md:items-stretch group h-full"
+                                                    aria-label={`View project ${project.title}`}
+                                                >
                                                     
                                                     {/* Text Column */}
                                                     <div className="flex flex-col justify-center w-full md:w-5/12 py-4">
@@ -178,7 +256,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                                         </div>
                                                     </div>
 
-                                                </div>
+                                                </Link>
                                             </ScrollReveal>
                                         );
                                     })}
@@ -189,7 +267,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                     <ScrollReveal delay={0.3}>
                                         <div className="mt-8 flex justify-start">
                                             <Link
-                                                href={`/#works`}
+                                                href={viewMoreHref}
                                                 className="inline-flex items-center justify-center rounded-full border border-white/30 bg-transparent px-6 py-2 md:px-8 md:py-2.5 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-white/10 hover:border-white/60"
                                             >
                                                 view more {category.toLowerCase()} projects

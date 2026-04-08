@@ -14,7 +14,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
     const imageUrl = "/images/aboutme.png";
 
     return (
-        <section id="about" className="relative py-4 md:py-8 bg-background">
+        <section id="about" className="relative py-4 md:py-8 bg-black">
             <div className="section-divider mx-auto mb-12 max-w-7xl md:mb-16" />
 
             <div className="mx-auto max-w-7xl px-6 lg:px-12">

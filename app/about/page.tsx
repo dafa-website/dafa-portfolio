@@ -25,7 +25,7 @@ export default async function AboutPage() {
       <Navbar photographerName={about.name?.toUpperCase()} />
 
       {/* Add top padding so it doesn't overlap behind the sticky navbar initially */}
-      <div className="pt-24 md:pt-32">
+      <div className="pt-24 md:pt-32 bg-black">
         <AboutSection about={about} />
         <ExperienceSection jobs={about.jobs || []} />
       </div>

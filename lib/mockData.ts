@@ -28,6 +28,8 @@ export const mockProjects: Project[] = [
             "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop",
         imageUrls: [
             "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1200&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1503602642458-232111445657?w=1200&h=800&fit=crop",
         ],
         client: "Katalis Brand",
         year: "2024",
@@ -93,6 +95,8 @@ export const mockProjects: Project[] = [
             "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=800&fit=crop&q=80",
         imageUrls: [
             "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop&q=80",
         ],
         client: "PT. Toyota Motor Manufacturing Indonesia",
         year: "2020",

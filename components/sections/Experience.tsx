@@ -13,7 +13,7 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
     if (!jobs || jobs.length === 0) return null;
 
     return (
-        <section id="experience" className="relative py-28 md:py-36 bg-background">
+        <section id="experience" className="relative py-28 md:py-36 bg-black">
             <div className="section-divider mx-auto mb-28 max-w-7xl md:mb-36" />
 
             <div className="mx-auto max-w-5xl px-6 lg:px-12">

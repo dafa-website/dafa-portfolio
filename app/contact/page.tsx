@@ -22,7 +22,7 @@ export default async function ContactPage() {
     <main>
       <Navbar photographerName={about.name?.toUpperCase()} />
 
-      <div className="pt-24 md:pt-32">
+      <div className="pt-24 md:pt-32 bg-black">
         <ContactForm />
       </div>
 

@@ -8,6 +8,7 @@ export const projectsQuery = `
     description,
     tags,
     coverImage,
+    images,
     videoUrl,
     client,
     year,
@@ -15,8 +16,8 @@ export const projectsQuery = `
   }
 `;
 
-export const featuredProjectsQuery = `
-  *[_type == "project" && featured == true] | order(year desc) {
+export const videoEditingProjectsQuery = `
+  *[_type == "project" && category == $category] | order(year desc) [$start...$end] {
     _id,
     title,
     slug,
@@ -24,6 +25,27 @@ export const featuredProjectsQuery = `
     description,
     tags,
     coverImage,
+    videoUrl,
+    client,
+    year,
+    featured
+  }
+`;
+
+export const videoEditingProjectsCountQuery = `
+  count(*[_type == "project" && category == $category])
+`;
+
+export const featuredProjectsQuery = `
+  *[_type == "project" && featured == true] | order(year desc)[0...3] {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    tags,
+    coverImage,
+    images,
     videoUrl,
     client,
     year,
