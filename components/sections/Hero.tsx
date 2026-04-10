@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { HERO_COPY } from "@/data/home";
+import { ArrowRight } from "lucide-react";
 
 interface HeroProps {
     lineOne?: string;
@@ -33,7 +34,7 @@ export default function Hero({
             {/* Background Image */}
             <div className="pointer-events-none absolute inset-0 z-0">
                 <Image
-                    src="/images/1350.png"
+                    src="/images/1351.png"
                     alt="Hero Background"
                     fill
                     priority
@@ -114,6 +115,41 @@ export default function Hero({
                             <strong className="font-bold text-white">{descriptionEmphasis}</strong>{" "}
                             {descriptionTail}
                         </p>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                        className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+                    >
+                        <a
+                            href="/contact"
+                            className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-gradient-to-b from-[#242424] to-[#111111] px-6 py-3 text-base font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:from-[#2a2a2a] hover:to-[#151515]"
+                        >
+                            <span>Hire Me</span>
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 transition-all duration-300 group-hover:bg-white">
+                                <ArrowRight
+                                    size={16}
+                                    className="text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-black"
+                                    strokeWidth={2.5}
+                                />
+                            </span>
+                        </a>
+                        <a
+                            href="/cv.pdf"
+                            download="Achmad Dafa Rizqullah-CV.pdf"
+                            className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-gradient-to-b from-[#242424] to-[#111111] px-6 py-3 text-base font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:from-[#2a2a2a] hover:to-[#151515]"
+                        >
+                            <span>Download CV</span>
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 transition-all duration-300 group-hover:bg-white">
+                                <ArrowRight
+                                    size={16}
+                                    className="text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-black"
+                                    strokeWidth={2.5}
+                                />
+                            </span>
+                        </a>
                     </motion.div>
                 </div>
             </div>

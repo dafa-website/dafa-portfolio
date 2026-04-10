@@ -15,9 +15,9 @@ export const HERO_COPY = {
   tagline: "Let's make sure people actually remember it.",
   descriptionLead: "Every business has something worth saying.",
   descriptionEmphasis:
-    "The problem is most of it gets lost in content that blends in. I help brands",
+    "The problem is most of it gets lost in content that blends in.",
   descriptionTail:
-    "cut through that with visuals and creative direction that are built to be remembered, not just scrolled past.",
+    "I help brands cut through that with visuals and creative direction that are built to be remembered, not just scrolled past.",
 } as const;
 
 export const ABOUT_PREVIEW_COPY = {

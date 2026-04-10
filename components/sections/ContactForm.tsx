@@ -1,21 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { CONTACT_COPY, CONTACT_INFO } from "@/data/site";
+import { ArrowRight } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 const inputStyles =
   "mt-2 w-full rounded-xl border border-white/10 bg-[#0f0f0f] px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/10";
 
 const labelStyles = "text-xs font-semibold uppercase tracking-[0.2em] text-white/60";
-
-interface ContactFormState {
-  firstName: string;
-  lastName: string;
-  email: string;
-  website: string;
-  message: string;
-}
 
 function normalizePhone(phone: string) {
   const digits = phone.replace(/\D/g, "");
@@ -25,47 +18,8 @@ function normalizePhone(phone: string) {
 }
 
 export default function ContactForm() {
-  const [form, setForm] = useState<ContactFormState>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    website: "",
-    message: "",
-  });
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError(null);
-
-    const phone = normalizePhone(CONTACT_INFO.phone);
-    if (!phone) {
-      setError("WhatsApp number is not configured.");
-      return;
-    }
-
-    const fullName = `${form.firstName} ${form.lastName}`.trim();
-    const lines = [
-      `Name: ${fullName}`,
-      `Email: ${form.email}`,
-      form.website ? `Website: ${form.website}` : null,
-      `Message: ${form.message}`,
-    ].filter(Boolean);
-
-    const messageText = lines.join("\n");
-    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
-      messageText,
-    )}`;
-
-    window.open(waUrl, "_blank", "noopener,noreferrer");
-  };
+  const whatsappNumber = normalizePhone(CONTACT_INFO.phone);
+  const whatsappHref = whatsappNumber ? `https://wa.me/${whatsappNumber}` : "#";
 
   return (
     <section className="bg-black py-16 md:py-24">
@@ -89,9 +43,10 @@ export default function ContactForm() {
         <ScrollReveal delay={0.15}>
           <form
             className="mt-12 grid gap-6"
-            onSubmit={handleSubmit}
-            noValidate
+            action="https://formspree.io/f/xreowoqb"
+            method="POST"
           >
+            <input type="hidden" name="_subject" value="New contact request" />
             <div className="grid gap-6 md:grid-cols-2">
               <label className={labelStyles}>
                 First Name
@@ -101,8 +56,6 @@ export default function ContactForm() {
                   type="text"
                   placeholder="Dafa"
                   required
-                  value={form.firstName}
-                  onChange={handleChange}
                 />
               </label>
 
@@ -114,8 +67,6 @@ export default function ContactForm() {
                   type="text"
                   placeholder="Rizqullah"
                   required
-                  value={form.lastName}
-                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -128,8 +79,6 @@ export default function ContactForm() {
                 type="email"
                 placeholder="hello@email.com"
                 required
-                value={form.email}
-                onChange={handleChange}
               />
             </label>
 
@@ -140,9 +89,24 @@ export default function ContactForm() {
                 name="website"
                 type="url"
                 placeholder="https://"
-                value={form.website}
-                onChange={handleChange}
               />
+            </label>
+
+            <label className={labelStyles}>
+              Budget
+              <select
+                className={inputStyles}
+                name="budget"
+                defaultValue=""
+                required
+              >
+                <option value="" disabled>
+                  Select budget
+                </option>
+                <option value="1.000.000 - 5.000.000">1.000.000 - 5.000.000</option>
+                <option value="5.000.000 - 10.000.000">5.000.000 - 10.000.000</option>
+                <option value="10.000.000 >">10.000.000 &gt;</option>
+              </select>
             </label>
 
             <label className={labelStyles}>
@@ -152,22 +116,50 @@ export default function ContactForm() {
                 name="message"
                 placeholder="Tell me about your project..."
                 required
-                value={form.message}
-                onChange={handleChange}
               />
             </label>
 
-            {error && (
-              <p className="text-sm text-red-400">{error}</p>
-            )}
-
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              Send to WhatsApp
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-white/15 bg-gradient-to-b from-[#242424] to-[#111111] px-6 py-3 text-base font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:from-[#2a2a2a] hover:to-[#151515]"
+              >
+                <span>Send Message</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 transition-all duration-300 group-hover:bg-white">
+                  <ArrowRight
+                    size={16}
+                    className="text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-black"
+                    strokeWidth={2.5}
+                  />
+                </span>
+              </button>
+            </div>
           </form>
+          <div className="mt-32 text-center">
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">
+              Prefer Direct Whatsapp?
+            </h1>
+            <div className="mt-4 flex justify-center">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-gradient-to-b from-[#242424] to-[#111111] px-6 py-3 text-base font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:from-[#2a2a2a] hover:to-[#151515]"
+              >
+                <span className="flex items-center gap-2">
+                  <SiWhatsapp className="h-4 w-4" />
+                  Send Whatsapp
+                </span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 transition-all duration-300 group-hover:bg-white">
+                  <ArrowRight
+                    size={16}
+                    className="text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-black"
+                    strokeWidth={2.5}
+                  />
+                </span>
+              </a>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>

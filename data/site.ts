@@ -15,11 +15,6 @@ export const FOOTER_LINKS = [
 
 export const SOCIAL_LINKS = [
   {
-    label: "Instagram",
-    href: "https://instagram.com/dafarizqullah",
-    icon: Instagram,
-  },
-  {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/dafarizqullah",
     icon: Linkedin,

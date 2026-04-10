@@ -50,9 +50,6 @@ export default function AboutPreview({
 
           <ScrollReveal variant="fade-left" delay={0.1}>
             <div className="flex flex-col items-center text-center text-white md:items-start md:text-left">
-              <span className="text-[12px] font-bold uppercase tracking-[0.3em] text-white mb-12">
-                Behind the creations
-              </span>
               <h3 className="text-xl font-semibold sm:text-2xl">
                 {ABOUT_PREVIEW_COPY.intro}
               </h3>
