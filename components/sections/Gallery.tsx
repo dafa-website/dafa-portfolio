@@ -147,6 +147,10 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                             category === "Video Editing"
                                 ? "View more video editing projects"
                                 : `View more ${category.toLowerCase()} projects`;
+                        const displayProjects =
+                            category === "Video Editing"
+                                ? catProjects.slice(0, 3)
+                                : catProjects;
 
                         return (
                             <div key={category} className="w-full flex flex-col gap-12 md:gap-16">
@@ -161,7 +165,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                 </ScrollReveal>
 
                                 <div className="flex flex-col gap-20 md:gap-28">
-                                    {catProjects.map((project, index) => {
+                                    {displayProjects.map((project, index) => {
                                         const tags = project.tags ?? [];
                                         const imageUrl = project.coverImageUrl || 
                                             (project.coverImage && isSanityConfigured ? urlFor(project.coverImage).url() : 

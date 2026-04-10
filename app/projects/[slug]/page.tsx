@@ -82,6 +82,18 @@ export default async function ProjectPage({ params }: PageProps) {
                             <span className="mb-3 inline-block rounded-full bg-accent/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-accent">
                                 {project.category}
                             </span>
+                            {project.tags && project.tags.length > 0 && (
+                                <div className="mb-4 flex flex-wrap gap-2">
+                                    {project.tags.map((tag) => (
+                                        <span
+                                            key={`${project._id}-${tag}`}
+                                            className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] font-semibold tracking-wide text-white/70"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                             <h1
                                 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
                                 style={{ fontFamily: "var(--font-montserrat)" }}

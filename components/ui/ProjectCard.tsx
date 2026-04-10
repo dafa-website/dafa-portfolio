@@ -19,6 +19,7 @@ export default function ProjectCard({
     const imageUrl =
         project.coverImageUrl ||
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop";
+    const tags = project.tags ?? [];
 
     const aspectMap = {
         large: "aspect-[3/4]",
@@ -95,6 +96,18 @@ export default function ProjectCard({
 
             {/* Title below card — always visible */}
             <div className="mt-3">
+                {tags.length > 0 && (
+                    <div className="mb-2 flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                            <span
+                                key={`${project._id}-${tag}`}
+                                className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] font-semibold tracking-wide text-white/70"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
                 <h3 className="text-sm font-medium text-foreground">{project.title}</h3>
                 <p className="mt-0.5 text-xs text-muted">{project.category} {project.year && `· ${project.year}`}</p>
             </div>

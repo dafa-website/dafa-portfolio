@@ -34,7 +34,7 @@ export default function Contact({
                 <ScrollReveal delay={0.3}>
                     <div className="mt-8 flex justify-center">
                         <a
-                            href={`mailto:${email}`}
+                            href="/contact"
                             className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-gradient-to-b from-[#242424] to-[#111111] px-6 py-3 text-base font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:from-[#2a2a2a] hover:to-[#151515]"
                         >
                             <span>{CONTACT_COPY.ctaLabel}</span>

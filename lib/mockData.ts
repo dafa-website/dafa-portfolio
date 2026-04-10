@@ -53,6 +53,40 @@ export const mockProjects: Project[] = [
         featured: true,
     },
     {
+        _id: "ve-2",
+        title: "Podcast Highlights — Creator Cuts",
+        slug: { current: "podcast-highlights-creator-cuts" },
+        category: "Video Editing",
+        tags: ["YouTube", "Shorts"],
+        description:
+            "Edited long-form podcast episodes into punchy highlight reels, optimized for retention and audience shareability across video platforms.",
+        coverImageUrl:
+            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=800&fit=crop&q=80",
+        imageUrls: [
+            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=800&fit=crop&q=80",
+        ],
+        client: "Creator Network",
+        year: "2024",
+        featured: true,
+    },
+    {
+        _id: "ve-3",
+        title: "E-commerce UGC — Reels Sprint",
+        slug: { current: "ecommerce-ugc-reels-sprint" },
+        category: "Video Editing",
+        tags: ["Instagram Reels", "TikTok"],
+        description:
+            "Crafted high-converting UGC edits with fast pacing, clear product moments, and strong hooks to drive clicks and saves.",
+        coverImageUrl:
+            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=600&h=800&fit=crop&q=80",
+        imageUrls: [
+            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=800&fit=crop&q=80",
+        ],
+        client: "D2C Brand",
+        year: "2024",
+        featured: true,
+    },
+    {
         _id: "3",
         title: "NRB TV Broadcast Design",
         slug: { current: "nrb-tv-broadcast" },

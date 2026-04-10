@@ -10,6 +10,7 @@ import Footer from "@/components/sections/Footer";
 import { safeFetch } from "@/lib/sanity";
 import {
   featuredProjectsQuery,
+  videoEditingProjectsQuery,
   aboutQuery,
   siteSettingsQuery,
 } from "@/lib/queries";
@@ -17,14 +18,27 @@ import { mockProjects, mockAbout } from "@/lib/mockData";
 import type { Project, About, SiteSettings } from "@/types";
 
 async function getData() {
-  const [projects, about, settings] = await Promise.all([
+  const [featuredProjects, videoEditingProjects, about, settings] = await Promise.all([
     safeFetch<Project[]>(featuredProjectsQuery),
+    safeFetch<Project[]>(videoEditingProjectsQuery, {
+      category: "Video Editing",
+      start: 0,
+      end: 3,
+    }),
     safeFetch<About>(aboutQuery),
     safeFetch<SiteSettings>(siteSettingsQuery),
   ]);
 
+  const mergedProjects = [
+    ...(featuredProjects ?? []),
+    ...(videoEditingProjects ?? []),
+  ];
+  const uniqueProjects = Array.from(
+    new Map(mergedProjects.map((project) => [project._id, project])).values(),
+  );
+
   return {
-    projects: projects && projects.length > 0 ? projects : mockProjects,
+    projects: uniqueProjects.length > 0 ? uniqueProjects : mockProjects,
     about: about || mockAbout,
     settings,
   };
