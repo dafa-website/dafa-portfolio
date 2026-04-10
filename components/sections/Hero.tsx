@@ -33,11 +33,11 @@ export default function Hero({
             {/* Background Image */}
             <div className="pointer-events-none absolute inset-0 z-0">
                 <Image
-                    src="/images/Hero.png"
+                    src="/images/1350.png"
                     alt="Hero Background"
                     fill
                     priority
-                    className="object-cover object-center lg:object-right"
+                    className="object-cover object-center lg:object-contain lg:object-right"
                     quality={100}
                 />
                 {/* Gradient overlays for text readability */}

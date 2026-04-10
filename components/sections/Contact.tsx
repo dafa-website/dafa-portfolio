@@ -12,8 +12,8 @@ export default function Contact({
     email = CONTACT_INFO.email,
 }: ContactProps) {
     return (
-        <section id="contact" className="relative bg-black py-24 md:py-32 px-32">
-            <div className="mx-auto max-w-4xl px-6 text-center lg:px-12">
+        <section id="contact" className="relative bg-black py-24 md:py-32">
+            <div className="mx-auto max-w-4xl px-6 text-center sm:px-8 lg:px-12">
                 <ScrollReveal>
                     <h2
                         className="text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"

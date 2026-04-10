@@ -11,7 +11,7 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ about }: AboutSectionProps) {
-    const imageUrl = "/images/aboutme.png";
+    const imageUrl = "/images/Aboutme.png";
 
     return (
         <section id="about" className="relative py-4 md:py-8 bg-black">
@@ -20,7 +20,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 <div className="grid items-start gap-12 md:grid-cols-[1fr_1.5fr] lg:gap-24">
                     {/* Left Column - Photo & Stats */}
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col items-center gap-6 md:items-start">
                         <ScrollReveal variant="fade-left">
                             <div className="relative aspect-[4/5] w-full overflow-hidden">
                                 <Image
@@ -40,8 +40,8 @@ export default function AboutSection({ about }: AboutSectionProps) {
 
                         {/* Stats Row */}
                         <ScrollReveal delay={0.1}>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col items-start justify-center gap-2 rounded-2xl bg-[#111111] p-5 border border-white/5">
+                            <div className="grid w-full grid-cols-2 gap-4 justify-items-center md:justify-items-start">
+                                <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-white/5 bg-[#111111] p-5 text-center md:items-start md:text-left">
                                     <MapPin size={20} className="text-foreground" />
                                     <div>
                                         <p className="text-[10px] font-medium uppercase tracking-widest text-muted">
@@ -52,7 +52,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col items-start justify-center gap-2 rounded-2xl bg-[#111111] p-5 border border-white/5">
+                                <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-white/5 bg-[#111111] p-5 text-center md:items-start md:text-left">
                                     <Briefcase size={20} className="text-foreground" />
                                     <div>
                                         <p className="text-[10px] font-medium uppercase tracking-widest text-muted">
@@ -68,7 +68,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                     </div>
 
                     {/* Right Column - Text & Philosophy */}
-                    <div className="flex flex-col gap-8 md:pt-8">
+                    <div className="flex flex-col items-center gap-8 text-center md:items-start md:text-left md:pt-8">
                         <ScrollReveal delay={0.2}>
                             <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                                 <User size={14} />
@@ -95,10 +95,10 @@ export default function AboutSection({ about }: AboutSectionProps) {
                         </ScrollReveal>
 
                         {/* Core Philosophy Section */}
-                        <div className="mt-6 flex flex-col gap-8 border-l border-border/50 pl-6 md:pl-8">
+                        <div className="mt-6 flex flex-col items-center gap-8 border-l-0 pl-0 text-center md:items-start md:border-l md:border-border/50 md:pl-8 md:text-left">
                             <ScrollReveal delay={0.5}>
                                 <div className="relative">
-                                    <div className="absolute -left-[33px] md:-left-[41px] top-1 flex h-6 w-6 items-center justify-center bg-background">
+                                    <div className="absolute -left-[33px] top-1 hidden h-6 w-6 items-center justify-center bg-background md:flex md:-left-[41px]">
                                         <div className="h-2 w-2 rounded-full bg-foreground" />
                                     </div>
                                     <h3 className="text-lg font-bold text-foreground">Core Philosophy</h3>
@@ -106,7 +106,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                             </ScrollReveal>
 
                             <ScrollReveal delay={0.55}>
-                                <div className="flex gap-5">
+                                <div className="flex flex-col items-center gap-5 text-center md:flex-row md:items-start md:text-left">
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-foreground border border-white/5">
                                         <Sparkles size={22} />
                                     </div>
@@ -120,7 +120,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                             </ScrollReveal>
 
                             <ScrollReveal delay={0.6}>
-                                <div className="flex gap-5">
+                                <div className="flex flex-col items-center gap-5 text-center md:flex-row md:items-start md:text-left">
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-foreground border border-white/5">
                                         <Heart size={22} />
                                     </div>
@@ -134,7 +134,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                             </ScrollReveal>
 
                             <ScrollReveal delay={0.65}>
-                                <div className="flex gap-5">
+                                <div className="flex flex-col items-center gap-5 text-center md:flex-row md:items-start md:text-left">
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-foreground border border-white/5">
                                         <Rocket size={22} />
                                     </div>

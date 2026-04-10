@@ -1,5 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
-import AboutSection from "@/components/sections/About";
+import AboutPreview from "@/components/sections/AboutPreview";
 import ExperienceSection from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -24,11 +24,9 @@ export default async function AboutPage() {
     <main>
       <Navbar photographerName={about.name?.toUpperCase()} />
 
-      {/* Add top padding so it doesn't overlap behind the sticky navbar initially */}
-      <div className="pt-24 md:pt-32 bg-black">
-        <AboutSection about={about} />
-        <ExperienceSection jobs={about.jobs || []} />
-      </div>
+      <AboutPreview showCta={false} />
+
+      <ExperienceSection jobs={about.jobs || []} />
 
       <Contact />
       <Footer photographerName={about.name} />
