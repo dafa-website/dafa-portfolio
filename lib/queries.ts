@@ -75,6 +75,14 @@ export const aboutQuery = `
     _id,
     name,
     tagline,
+    preview {
+      headingLineOne,
+      headingLineTwo,
+      subtitle,
+      intro,
+      body,
+      cta
+    },
     bio,
     profileImage,
     heroVideoUrl,
@@ -91,6 +99,9 @@ export const siteSettingsQuery = `
     title,
     description,
     heroVideoUrl,
-    heroTagline
+    heroTagline,
+    overviewTitle,
+    overviewDescription,
+    overviewVideoUrl
   }
 `;

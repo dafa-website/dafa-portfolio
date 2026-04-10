@@ -10,9 +10,11 @@ interface NavbarProps {
   photographerName?: string;
 }
 
-export default function Navbar({ photographerName = "DAFA" }: NavbarProps) {
+export default function Navbar({ photographerName = "" }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const displayName = photographerName.trim();
+  const homeLabel = displayName || "DAFA";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -77,8 +79,9 @@ export default function Navbar({ photographerName = "DAFA" }: NavbarProps) {
             <Link
               href="/"
               className="flex h-full items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-bold tracking-[0.2em] text-background transition-transform hover:scale-105"
+              aria-label={homeLabel}
             >
-              {photographerName}
+              {homeLabel}
             </Link>
 
             <ul className="hidden items-center gap-8 pl-8 md:flex">

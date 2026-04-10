@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types";
+import { isSanityConfigured, urlFor } from "@/lib/sanity";
 
 
 interface ProjectCardProps {
@@ -16,9 +17,11 @@ export default function ProjectCard({
     size = "medium",
     index = 0,
 }: ProjectCardProps) {
-    const imageUrl =
-        project.coverImageUrl ||
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop";
+    const imageUrl = project.coverImageUrl
+        ? project.coverImageUrl
+        : project.coverImage && isSanityConfigured
+            ? urlFor(project.coverImage).width(900).height(1200).fit("crop").url()
+            : "";
     const tags = project.tags ?? [];
 
     const aspectMap = {
@@ -35,14 +38,18 @@ export default function ProjectCard({
         >
             {/* Image */}
             <div className={`relative ${aspectMap[size]} w-full overflow-hidden rounded-lg bg-card`}>
-                <Image
-                    src={imageUrl}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                    priority={index < 3}
-                />
+                {imageUrl ? (
+                    <Image
+                        src={imageUrl}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                        priority={index < 3}
+                    />
+                ) : (
+                    <div className="absolute inset-0 bg-[#0b0b0b]" />
+                )}
 
                 {/* Always-visible subtle gradient at bottom for readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />

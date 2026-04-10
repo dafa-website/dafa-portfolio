@@ -6,14 +6,13 @@ import Footer from "@/components/sections/Footer";
 
 import { safeFetch } from "@/lib/sanity";
 import { aboutQuery } from "@/lib/queries";
-import { mockAbout } from "@/lib/mockData";
 import type { About } from "@/types";
 
 async function getData() {
   const about = await safeFetch<About>(aboutQuery);
 
   return {
-    about: about || mockAbout,
+    about,
   };
 }
 
@@ -22,14 +21,14 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <Navbar photographerName={about.name?.toUpperCase()} />
+      <Navbar photographerName={about?.name?.toUpperCase()} />
 
-      <AboutPreview showCta={false} />
+      <AboutPreview about={about} showCta={false} />
 
-      <ExperienceSection jobs={about.jobs || []} />
+      <ExperienceSection jobs={about?.jobs || []} />
 
       <Contact />
-      <Footer photographerName={about.name} />
+      <Footer photographerName={about?.name} />
     </main>
   );
 }

@@ -18,6 +18,44 @@ export default defineType({
             description: "Short subtitle, e.g. 'Visual Storyteller & Photographer'",
         }),
         defineField({
+            name: "preview",
+            title: "About Preview Copy",
+            type: "object",
+            fields: [
+                defineField({
+                    name: "headingLineOne",
+                    title: "Heading Line One",
+                    type: "string",
+                }),
+                defineField({
+                    name: "headingLineTwo",
+                    title: "Heading Line Two",
+                    type: "string",
+                }),
+                defineField({
+                    name: "subtitle",
+                    title: "Subtitle",
+                    type: "string",
+                }),
+                defineField({
+                    name: "intro",
+                    title: "Intro",
+                    type: "string",
+                }),
+                defineField({
+                    name: "body",
+                    title: "Body",
+                    type: "text",
+                    rows: 4,
+                }),
+                defineField({
+                    name: "cta",
+                    title: "CTA Label",
+                    type: "string",
+                }),
+            ],
+        }),
+        defineField({
             name: "bio",
             title: "Bio",
             type: "text",

@@ -3,9 +3,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
-import { safeFetch, isSanityConfigured } from "@/lib/sanity";
+import { safeFetch, isSanityConfigured, urlFor } from "@/lib/sanity";
 import { projectBySlugQuery, projectsQuery } from "@/lib/queries";
-import { mockProjects } from "@/lib/mockData";
 import type { Project } from "@/types";
 import Footer from "@/components/sections/Footer";
 
@@ -19,7 +18,7 @@ async function getProject(slug: string): Promise<Project | null> {
     const project = await safeFetch<Project>(projectBySlugQuery, { slug });
     if (project) return project;
 
-    return mockProjects.find((p) => p.slug.current === slug) || null;
+    return null;
 }
 
 export async function generateStaticParams() {
@@ -32,9 +31,7 @@ export async function generateStaticParams() {
         }
     }
 
-    return mockProjects.map((project) => ({
-        slug: project.slug.current,
-    }));
+    return [];
 }
 
 export default async function ProjectPage({ params }: PageProps) {
@@ -43,10 +40,14 @@ export default async function ProjectPage({ params }: PageProps) {
 
     if (!project) notFound();
 
-    const coverUrl =
-        project.coverImageUrl ||
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop";
-    const galleryUrls = project.imageUrls || [];
+    const coverUrl = project.coverImage
+        ? urlFor(project.coverImage).width(1600).height(900).fit("crop").url()
+        : "";
+    const galleryUrls = project.images
+        ? project.images.map((image) =>
+            urlFor(image).width(1600).height(900).fit("crop").url(),
+        )
+        : [];
 
     return (
         <>
@@ -67,14 +68,18 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
 
                 <section className="relative h-[60vh] w-full overflow-hidden sm:h-[70vh]">
-                    <Image
-                        src={coverUrl}
-                        alt={project.title}
-                        fill
-                        sizes="100vw"
-                        className="object-cover"
-                        priority
-                    />
+                    {coverUrl ? (
+                        <Image
+                            src={coverUrl}
+                            alt={project.title}
+                            fill
+                            sizes="100vw"
+                            className="object-cover"
+                            priority
+                        />
+                    ) : (
+                        <div className="absolute inset-0 bg-[#0b0b0b]" />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
 
                     <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-12">

@@ -29,6 +29,23 @@ export default defineType({
             type: "string",
             description: "Text shown below the photographer name in the hero",
         }),
+        defineField({
+            name: "overviewTitle",
+            title: "Overview Title",
+            type: "string",
+        }),
+        defineField({
+            name: "overviewDescription",
+            title: "Overview Description",
+            type: "text",
+            rows: 3,
+        }),
+        defineField({
+            name: "overviewVideoUrl",
+            title: "Overview Video URL (Cloudinary)",
+            type: "url",
+            description: "Video for the portfolio overview section",
+        }),
     ],
     preview: {
         select: { title: "title" },

@@ -14,6 +14,15 @@ export interface SocialLink {
   url: string;
 }
 
+export interface AboutPreviewCopy {
+  headingLineOne?: string;
+  headingLineTwo?: string;
+  subtitle?: string;
+  intro?: string;
+  body?: string;
+  cta?: string;
+}
+
 export interface Project {
   _id: string;
   title: string;
@@ -46,6 +55,7 @@ export interface About {
   _id: string;
   name: string;
   tagline: string;
+  preview?: AboutPreviewCopy;
   bio: string;
   profileImage?: SanityImage;
   profileImageUrl?: string;
@@ -62,4 +72,7 @@ export interface SiteSettings {
   description: string;
   heroVideoUrl?: string;
   heroTagline?: string;
+  overviewTitle?: string;
+  overviewDescription?: string;
+  overviewVideoUrl?: string;
 }

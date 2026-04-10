@@ -2,16 +2,30 @@
 
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { ABOUT_PREVIEW_COPY } from "@/data/home";
 import type { About } from "@/types";
 import { MapPin, Briefcase, User, Sparkles, Heart, Rocket } from "lucide-react";
+import { isSanityConfigured, urlFor } from "@/lib/sanity";
 
 interface AboutSectionProps {
-    about: About;
+    about?: About | null;
 }
 
 export default function AboutSection({ about }: AboutSectionProps) {
-    const imageUrl = "/images/Aboutme.png";
+    if (!about) return null;
+
+    const preview = about.preview;
+    const headingLineOne = preview?.headingLineOne ?? "";
+    const headingLineTwo = preview?.headingLineTwo ?? "";
+    const subtitle = preview?.subtitle ?? about.tagline ?? "";
+    const intro = preview?.intro ?? about.name ?? "";
+    const body = preview?.body ?? about.bio ?? "";
+
+    const profileImageUrl =
+        about.profileImage && isSanityConfigured
+            ? urlFor(about.profileImage).width(900).height(1100).fit("crop").url()
+            : null;
+
+    const showHeading = Boolean(headingLineOne || headingLineTwo);
 
     return (
         <section id="about" className="relative py-4 md:py-8 bg-black">
@@ -23,13 +37,17 @@ export default function AboutSection({ about }: AboutSectionProps) {
                     <div className="flex flex-col items-center gap-6 md:items-start">
                         <ScrollReveal variant="fade-left">
                             <div className="relative aspect-[4/5] w-full overflow-hidden">
-                                <Image
-                                    src={imageUrl}
-                                    alt={about.name}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 40vw"
-                                    className="object-contain object-bottom"
-                                />
+                                {profileImageUrl ? (
+                                    <Image
+                                        src={profileImageUrl}
+                                        alt={about.name}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 40vw"
+                                        className="object-contain object-bottom"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 bg-[#0b0b0b]" />
+                                )}
                                 {/* Bottom fade to blend into background */}
                                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
                                 {/* Side fades for seamless blending */}
@@ -48,7 +66,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                                             Location
                                         </p>
                                         <p className="mt-1 font-semibold text-foreground">
-                                            {about.location || "Indonesia"}
+                                            {about.location || "—"}
                                         </p>
                                     </div>
                                 </div>
@@ -59,7 +77,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                                             Experience
                                         </p>
                                         <p className="mt-1 font-semibold text-foreground">
-                                            {about.experience || "4+"} Years
+                                            {about.experience ? `${about.experience} Years` : "—"}
                                         </p>
                                     </div>
                                 </div>
@@ -72,26 +90,32 @@ export default function AboutSection({ about }: AboutSectionProps) {
                         <ScrollReveal delay={0.2}>
                             <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                                 <User size={14} />
-                                <span>
-                                    {ABOUT_PREVIEW_COPY.headingLineOne}{" "}
-                                    {ABOUT_PREVIEW_COPY.headingLineTwo}
-                                </span>
+                                {showHeading && (
+                                    <span>
+                                        {headingLineOne}{" "}
+                                        {headingLineTwo}
+                                    </span>
+                                )}
                             </div>
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.3}>
-                            <h2
-                                className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-                                style={{ fontFamily: "var(--font-montserrat)" }}
-                            >
-                                {ABOUT_PREVIEW_COPY.intro}
-                            </h2>
+                            {intro && (
+                                <h2
+                                    className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+                                    style={{ fontFamily: "var(--font-montserrat)" }}
+                                >
+                                    {intro}
+                                </h2>
+                            )}
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.4}>
-                            <p className="max-w-2xl text-base leading-relaxed text-muted">
-                                {ABOUT_PREVIEW_COPY.subtitle} {ABOUT_PREVIEW_COPY.body}
-                            </p>
+                            {(subtitle || body) && (
+                                <p className="max-w-2xl text-base leading-relaxed text-muted">
+                                    {subtitle} {body}
+                                </p>
+                            )}
                         </ScrollReveal>
 
                         {/* Core Philosophy Section */}

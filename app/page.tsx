@@ -9,64 +9,55 @@ import Footer from "@/components/sections/Footer";
 
 import { safeFetch } from "@/lib/sanity";
 import {
-  featuredProjectsQuery,
-  videoEditingProjectsQuery,
+  projectsQuery,
   aboutQuery,
   siteSettingsQuery,
 } from "@/lib/queries";
-import { mockProjects, mockAbout } from "@/lib/mockData";
 import type { Project, About, SiteSettings } from "@/types";
 
 async function getData() {
-  const [featuredProjects, videoEditingProjects, about, settings] = await Promise.all([
-    safeFetch<Project[]>(featuredProjectsQuery),
-    safeFetch<Project[]>(videoEditingProjectsQuery, {
-      category: "Video Editing",
-      start: 0,
-      end: 3,
-    }),
+  const [projects, about, settings] = await Promise.all([
+    safeFetch<Project[]>(projectsQuery),
     safeFetch<About>(aboutQuery),
     safeFetch<SiteSettings>(siteSettingsQuery),
   ]);
 
-  const mergedProjects = [
-    ...(featuredProjects ?? []),
-    ...(videoEditingProjects ?? []),
-  ];
-  const uniqueProjects = Array.from(
-    new Map(mergedProjects.map((project) => [project._id, project])).values(),
-  );
-
   return {
-    projects: uniqueProjects.length > 0 ? uniqueProjects : mockProjects,
-    about: about || mockAbout,
+    projects: projects ?? [],
+    about,
     settings,
   };
 }
 
 export default async function Home() {
   const { projects, about, settings } = await getData();
-  const heroVideoUrl = settings?.heroVideoUrl || about.heroVideoUrl;
+  const heroVideoUrl = settings?.heroVideoUrl || about?.heroVideoUrl;
+  const heroTagline = settings?.heroTagline || about?.tagline;
 
   return (
     <main>
-      <Navbar photographerName={about.name?.toUpperCase()} />
+      <Navbar photographerName={about?.name?.toUpperCase()} />
 
       <Hero
         videoUrl={heroVideoUrl}
+        tagline={heroTagline}
       />
 
       <SkillsMarquee />
 
-      <CategoryOverview />
+      <CategoryOverview
+        title={settings?.overviewTitle}
+        description={settings?.overviewDescription}
+        videoUrl={settings?.overviewVideoUrl}
+      />
 
       <SelectedWorks projects={projects} />
 
-      <AboutPreview />
+      <AboutPreview about={about} />
 
       <Contact />
 
-      <Footer photographerName={about.name} />
+      <Footer photographerName={about?.name} />
     </main>
   );
 }

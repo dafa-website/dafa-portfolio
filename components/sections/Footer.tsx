@@ -4,19 +4,22 @@ interface FooterProps {
     photographerName?: string;
 }
 
-export default function Footer({ photographerName = "Dafa Rizqullah" }: FooterProps) {
+export default function Footer({ photographerName = "" }: FooterProps) {
     const currentYear = new Date().getFullYear();
+    const displayName = photographerName.trim();
 
     return (
         <footer className="border-t border-border bg-black py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-12">
                 <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
-                    <a
-                        href="#hero"
-                        className="text-sm font-bold uppercase tracking-[0.3em] text-foreground transition-colors hover:text-accent"
-                    >
-                        {photographerName}
-                    </a>
+                    {displayName && (
+                        <a
+                            href="#hero"
+                            className="text-sm font-bold uppercase tracking-[0.3em] text-foreground transition-colors hover:text-accent"
+                        >
+                            {displayName}
+                        </a>
+                    )}
 
                     <ul className="flex items-center gap-6">
                         {FOOTER_LINKS.map((link) => (
@@ -52,7 +55,7 @@ export default function Footer({ photographerName = "Dafa Rizqullah" }: FooterPr
 
                 <div className="mt-8 border-t border-border pt-6 text-center">
                     <p className="text-xs text-muted/60">
-                        © {currentYear} {photographerName}. All rights reserved.
+                        © {currentYear}{displayName ? ` ${displayName}.` : "."} All rights reserved.
                     </p>
                 </div>
             </div>

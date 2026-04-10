@@ -8,6 +8,7 @@ import { schemaTypes } from "./sanity/schemas";
 export default defineConfig({
     name: "photographer-portfolio",
     title: "Photographer Portfolio",
+    basePath: "/studio",
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "placeholder",
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
     plugins: [structureTool(), visionTool()],

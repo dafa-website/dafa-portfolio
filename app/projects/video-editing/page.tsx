@@ -10,7 +10,6 @@ import {
   videoEditingProjectsCountQuery,
   videoEditingProjectsQuery,
 } from "@/lib/queries";
-import { mockAbout, mockProjects } from "@/lib/mockData";
 import type { About, Project } from "@/types";
 
 const CATEGORY = "Video Editing";
@@ -54,19 +53,13 @@ async function getVideoEditingData(page: number) {
     safeFetch<About>(aboutQuery),
   ]);
 
-  const fallbackProjects = mockProjects.filter(
-    (project) => project.category === CATEGORY,
-  );
-
-  const items = (projects ?? fallbackProjects.slice(start, end)).map(
-    resolveCoverImage,
-  );
-  const totalItems = totalCount ?? fallbackProjects.length;
+  const items = (projects ?? []).map(resolveCoverImage);
+  const totalItems = totalCount ?? items.length;
 
   return {
     projects: items,
     totalItems,
-    about: about || mockAbout,
+    about,
   };
 }
 
@@ -84,7 +77,7 @@ export default async function VideoEditingProjectsPage({
 
   return (
     <main className="min-h-screen bg-black">
-      <Navbar photographerName={about.name?.toUpperCase()} />
+      <Navbar photographerName={about?.name?.toUpperCase()} />
 
       <section className="pt-24 md:pt-32 pb-16">
         <div className="mx-auto max-w-6xl px-6 lg:px-12">
@@ -155,7 +148,7 @@ export default async function VideoEditingProjectsPage({
         </div>
       </section>
 
-      <Footer photographerName={about.name} />
+      <Footer photographerName={about?.name} />
     </main>
   );
 }

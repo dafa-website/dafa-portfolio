@@ -68,8 +68,8 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                                                         {job.description}
                                                     </p>
                                                     <div className="mt-2 flex flex-wrap gap-2">
-                                                        {job.skills.map(skill => (
-                                                            <span key={skill} className="rounded-full bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted border border-white/5">
+                                                        {job.skills.map((skill, skillIndex) => (
+                                                            <span key={`${job._key || index}-skill-${skillIndex}-${skill}`} className="rounded-full bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted border border-white/5">
                                                                 {skill}
                                                             </span>
                                                         ))}
@@ -115,8 +115,8 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                                                         {job.description}
                                                     </p>
                                                     <div className="mt-2 flex flex-wrap gap-2">
-                                                        {job.skills.map(skill => (
-                                                            <span key={skill} className="rounded-full bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted border border-white/5">
+                                                        {job.skills.map((skill, skillIndex) => (
+                                                            <span key={`${job._key || index}-skill-${skillIndex}-${skill}`} className="rounded-full bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted border border-white/5">
                                                                 {skill}
                                                             </span>
                                                         ))}
