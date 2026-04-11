@@ -1,5 +1,11 @@
 import { Camera, Film, PenTool, Share2, Video } from "lucide-react";
-import { SiCanva, SiFigma, SiGooglegemini } from "react-icons/si";
+import {
+  SiCanva,
+  SiClaude,
+  SiDavinciresolve,
+  SiFigma,
+  SiGooglegemini,
+} from "react-icons/si";
 import {
   AdobeAfterEffectsIcon,
   AdobeIllustratorIcon,
@@ -74,9 +80,11 @@ export const SKILLS = [
   { name: "Illustrator", icon: AdobeIllustratorIcon },
   { name: "Photoshop", icon: AdobePhotoshopIcon },
   { name: "CapCut", icon: CapCutIcon },
+  { name: "DaVinci Resolve", icon: SiDavinciresolve },
   { name: "Canva", icon: SiCanva },
   { name: "Figma", icon: SiFigma },
   { name: "Gemini Banana", icon: SiGooglegemini },
+  { name: "Claude", icon: SiClaude },
 ] as const;
 
 export const WORK_CATEGORIES_ORDER = [
