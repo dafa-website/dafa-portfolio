@@ -66,7 +66,7 @@ function VisualProjectCarousel({
                 src={currentUrl}
                 alt={`${project.title} background`}
                 fill
-                className="object-cover opacity-30 blur-2xl scale-110 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+                className="object-cover opacity-50 blur-sm scale-110 pointer-events-none transition-opacity duration-500"
             />
 
             {/* Main Image Container */}
@@ -76,7 +76,7 @@ function VisualProjectCarousel({
                     alt={project.title}
                     fill
                     sizes="100vw"
-                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-[1.02]"
+                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700"
                     priority={priority}
                 />
             </div>
@@ -301,8 +301,8 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                                             priority={index === 0 && catIndex === 0}
                                                         />
                                                         {/* Text overlay for visual heavy */}
-                                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 backdrop-blur-md pointer-events-none">
-                                                            <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-center">
+                                                        <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center p-6 backdrop-blur-sm pointer-events-none">
+                                                            <div className="translate-y-4 transition-transform duration-500 text-center">
                                                                 <h3 className="text-2xl md:text-5xl font-extrabold text-white tracking-widest uppercase mb-4 drop-shadow-lg">
                                                                     {project.title}
                                                                 </h3>
@@ -358,7 +358,7 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
 
                                                     {/* Visual Column */}
                                                     <div className="w-full md:w-7/12 flex md:justify-end items-center">
-                                                        <div className="relative bg-[#1a1a1a] rounded-[24px] p-1 md:p-2 w-full max-w-[550px] aspect-[16/10] flex items-center justify-center border-[0.5px] border-white/5 shadow-2xl transition-all duration-300 hover:border-white/15 hover:bg-[#222]">
+                                                        <div className="relative bg-[#1a1a1a] rounded-[24px] p-1 md:p-2 w-full max-w-[550px] aspect-[16/10] flex items-center justify-center border-[0.5px] border-white/5 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#222]">
                                                             
                                                             {/* Media Container */}
                                                             <div className="relative w-full h-full rounded-md md:rounded-[12px] overflow-hidden bg-black flex items-center justify-center shadow-inner cursor-pointer">

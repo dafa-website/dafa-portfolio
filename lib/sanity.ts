@@ -12,19 +12,16 @@ export const sanityConfig = {
     projectId: projectId || "placeholder",
     dataset,
     apiVersion,
-    useCdn: process.env.NODE_ENV === "production",
+    useCdn: false, 
 };
 
 export const client = createClient(sanityConfig);
-
 
 const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImage) {
     return builder.image(source);
 }
-
-
 
 export async function safeFetch<T>(
     query: string,
@@ -34,7 +31,9 @@ export async function safeFetch<T>(
     if (!isSanityConfigured) return null;
 
     try {
-        const result = await client.fetch(query, params ?? {});
+        const result = await client.fetch(query, params ?? {}, {
+            next: { revalidate: 60 }
+        });
         return result as T;
     } catch {
         return null;
