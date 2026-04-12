@@ -272,3 +272,62 @@ The project builds to static HTML where possible. Run `npm run build` and deploy
 ## 📜 License
 
 This project is private and intended for personal portfolio use.
+
+---
+
+## 📖 Panduan Penggunaan CMS (Untuk Klien)
+
+Selamat datang di sistem manajemen konten website Anda! Panduan ini akan menjelaskan secara rinci fungsi dari masing-masing tombol dan kolom (field) isian di dalam Sanity.
+
+### 1. 🔑 Cara Masuk (Login)
+1. Buka tautan Sanity Studio di browser Anda (Biasanya berupa `www.website-anda.com/studio` atau `localhost:3000/studio`).
+2. Anda akan diminta login. Silakan tekan opsi login dengan akun Google atau GitHub yang sebelumnya sudah didaftarkan.
+3. Setelah masuk, pandangan pertama Anda adalah halaman **Desk** (kiri adalah menu, kanan adalah layar pengeditan).
+
+### 2. 📂 Penjelasan Detail Setiap Menu (Desk)
+
+#### A. ⚙️ Site Settings (Pengaturan Inti Website)
+Ini adalah pusat informasi umum website Anda. **Hanya buat 1 dokumen** di dalam menu ini.
+* **Site Title:** Judul website Anda (muncul pada tab browser).
+* **Site Description:** Deskripsi singkat website untuk keperluan SEO Google.
+* **Hero Video URL (Cloudinary):** Link video latar belakang untuk halaman paling depan (Hero Section). Gunakan link dari Cloudinary.
+* **Hero Tagline:** Teks semboyan yang muncul di halaman depan, tepat di bawah nama Anda.
+* **Overview Title:** Judul untuk bagian "Overview" (Sekilas Tentang) di halaman depan.
+* **Overview Description:** Teks penjelasan/paragraf yang mendampingi "Overview Title".
+* **Overview Video URL:** Video yang ditampilkan secara khusus pada seksi *Overview* di halaman depan.
+
+#### B. 👤 About (Profil & Pengalaman)
+Menu ini mengatur data diri, halaman "About", pengantar (preview) profil, serta riwayat pekerjaan. **Cukup buat 1 dokumen saja**.
+* **Photographer Name:** Nama Anda yang ditampilkan di website.
+* **Tagline:** Slogan atau profesi Anda (Contoh: *"Visual Storyteller & Photographer"*).
+* **About Preview Copy:** Teks pendek yang akan ditampilkan pada riwayat singkat di halaman utama (Home). Mengatur Heading, Subtitle, Text Body, hingga tombol CTA.
+* **Bio:** Penjelasan lengkap (biografi panjang) tentang diri Anda.
+* **Profile Image:** Foto profil Anda. Fitur "Hotspot" tersedia agar Anda bisa menggeser titik fokus wajah.
+* **Hero Background Video URL:** Video latar belakang khusus halaman "About".
+* **Years of Experience:** Angka berapa lama Anda bekerja di industri ini (Misal: "5+").
+* **Location:** Domisili Anda (Misal: "Jakarta, ID").
+* **Social Links (Array):** Link akun media sosial (Instagram, LinkedIn, dll). Klik "Add item" -> Pilih Platform -> Masukkan URL.
+* **Work Experience / Jobs (Array):** Riwayat pekerjaan Anda. Isi Role, Company, Location, Start/End Date, Description, dan Skills.
+
+#### C. 📁 Project (Pusat Portofolio Karya)
+Fungsi menu ini adalah tempat Anda menambah, mengedit, atau menghapus hasil portofolio. Setiap karya dibuat sebagai **1 dokumen terpisah**.
+* **Title:** Judul proyek karya.
+* **Slug:** Susunan tautan (link URL). **Wajib:** tekan tombol **"Generate"** otomatis, jangan diisi manual dengan spasi.
+* **Category:** Kategori karya (*Video Editing, Graphic Design, AI Product Photography*).
+* **Tags:** Label atau keyword (*Commercial*, *Corporate*, dll).
+* **Description:** Deskripsi panjang tentang karya Anda.
+* **Cover Image:** Gambar sampul utama (thumbnail). Wajib diisi.
+* **Gallery Images:** Kumpulan foto tambahan dalam satu proyek.
+* **Project Video:** Link dari Cloudinary untuk menampung tayangan video.
+* **Client:** Nama Klien/Brand.
+* **Year:** Tahun proyek diselesaikan. Sangat penting agar karya bisa di-sortir sistem urut dari yang terbaru.
+* **Featured:** Nyalakan saklar (True) jika ingin karya ini disorot/tampil di halaman utama.
+
+### 3. ✍️ Aturan Wajib Publikasi (Simpan & Tayangkan)
+* Teks yang baru diketik akan berstatus **Draft** (belum tayang namun sudah tersimpan otomatis).
+* **Tombol Publish (Wajib Ditekan):** Di sudut kanan bawah, klik tombol warna hijau **"Publish"** agar perubahan Anda ditayangkan langsung ke website publik. Khusus kolom URL video Cloudinary, perubahan bisa langsung tersimpan tanpa nge-publish teks jika videonya berhasil ter-upload.
+
+#### Menghapus atau Menyembunyikan Karya
+Klik karya Anda, pada tanda panah (atau titik tiga) di sebelah tombol "Publish", pilih:
+* **Unpublish:** Menarik karya dari website, mengubahnya menjadi *Draft*.
+* **Delete:** Menghapus data karya dari sistem selamanya.
