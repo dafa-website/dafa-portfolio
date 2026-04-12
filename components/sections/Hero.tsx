@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { HERO_COPY } from "@/data/home";
@@ -26,6 +27,49 @@ export default function Hero({
     descriptionTail = HERO_COPY.descriptionTail,
     videoUrl,
 }: HeroProps) {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+
+    const syncMuted = (video: HTMLVideoElement) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 0;
+    };
+
+    useEffect(() => {
+        if (!videoUrl || !videoRef.current) return;
+
+        const attemptPlay = async () => {
+            if (!videoRef.current) return;
+
+            syncMuted(videoRef.current);
+
+            try {
+                await videoRef.current.play();
+            } catch {
+                // Autoplay can be blocked by the browser; ignore silently.
+            }
+        };
+
+        attemptPlay();
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        void attemptPlay();
+                    }
+                });
+            },
+            { threshold: 0.25 },
+        );
+
+        observer.observe(videoRef.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [videoUrl]);
+
     return (
         <section
             id="hero"
@@ -50,11 +94,17 @@ export default function Hero({
             {/* Optional video background */}
             {videoUrl && (
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
+                    onLoadedMetadata={() => {
+                        if (!videoRef.current) return;
+                        syncMuted(videoRef.current);
+                        void videoRef.current.play();
+                    }}
                     className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-10 grayscale"
                     src={videoUrl}
                 />

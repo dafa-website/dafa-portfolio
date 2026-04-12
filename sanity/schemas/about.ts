@@ -70,8 +70,8 @@ export default defineType({
         defineField({
             name: "heroVideoUrl",
             title: "Hero Background Video URL",
-            type: "url",
-            description: "Cloudinary video URL for the hero section background",
+            type: "cloudinaryVideoUrl",
+            description: "Upload a Cloudinary video for the hero background",
         }),
         defineField({
             name: "experience",

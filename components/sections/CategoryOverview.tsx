@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface CategoryOverviewProps {
@@ -13,6 +14,49 @@ export default function CategoryOverview({
     description,
     videoUrl,
 }: CategoryOverviewProps) {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+
+    const syncMuted = (video: HTMLVideoElement) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 0;
+    };
+
+    useEffect(() => {
+        if (!videoUrl || !videoRef.current) return;
+
+        const attemptPlay = async () => {
+            if (!videoRef.current) return;
+
+            syncMuted(videoRef.current);
+
+            try {
+                await videoRef.current.play();
+            } catch {
+                // Autoplay can be blocked by the browser; ignore silently.
+            }
+        };
+
+        attemptPlay();
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        void attemptPlay();
+                    }
+                });
+            },
+            { threshold: 0.25 },
+        );
+
+        observer.observe(videoRef.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [videoUrl]);
+
     const heading = title || "Overview";
 
     return (
@@ -42,30 +86,23 @@ export default function CategoryOverview({
                             {videoUrl ? (
                                 <video
                                     src={videoUrl}
+                                    ref={videoRef}
                                     autoPlay
                                     loop
                                     muted
                                     playsInline
                                     preload="metadata"
+                                    onLoadedMetadata={() => {
+                                        if (!videoRef.current) return;
+                                        syncMuted(videoRef.current);
+                                        void videoRef.current.play();
+                                    }}
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />
                             ) : (
                                 <div className="absolute inset-0 bg-black/60" />
                             )}
                             <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm">
-                                    <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 24 24"
-                                        fill="white"
-                                        className="ml-1 opacity-90"
-                                    >
-                                        <polygon points="6,4 20,12 6,20" />
-                                    </svg>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </ScrollReveal>

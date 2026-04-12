@@ -20,8 +20,8 @@ export default defineType({
         defineField({
             name: "heroVideoUrl",
             title: "Hero Video URL (Cloudinary)",
-            type: "url",
-            description: "Autoplay background video for the hero section",
+            type: "cloudinaryVideoUrl",
+            description: "Upload a Cloudinary video for the hero section",
         }),
         defineField({
             name: "heroTagline",
@@ -43,8 +43,8 @@ export default defineType({
         defineField({
             name: "overviewVideoUrl",
             title: "Overview Video URL (Cloudinary)",
-            type: "url",
-            description: "Video for the portfolio overview section",
+            type: "cloudinaryVideoUrl",
+            description: "Upload a Cloudinary video for the overview section",
         }),
     ],
     preview: {

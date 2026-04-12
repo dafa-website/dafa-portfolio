@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -17,6 +17,12 @@ interface VisualProjectCarouselProps {
     project: Project;
     fallbackUrl: string;
     priority?: boolean;
+}
+
+interface InlineVideoPreviewProps {
+    src: string;
+    poster: string;
+    title: string;
 }
 
 function resolveProjectImages(project: Project, fallbackUrl: string) {
@@ -94,6 +100,119 @@ function VisualProjectCarousel({
                         <ChevronRight size={18} />
                     </button>
                 </div>
+            )}
+        </div>
+    );
+}
+
+function InlineVideoPreview({ src, poster, title }: InlineVideoPreviewProps) {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const syncMuted = (video: HTMLVideoElement) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 0;
+    };
+
+    const attemptPlay = async () => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        syncMuted(video);
+
+        try {
+            await video.play();
+        } catch {
+            // Autoplay can be blocked by the browser; ignore silently.
+        }
+    };
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        syncMuted(video);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        void attemptPlay();
+                    } else {
+                        video.pause();
+                    }
+                });
+            },
+            { threshold: 0.35 },
+        );
+
+        observer.observe(video);
+
+        return () => {
+            observer.disconnect();
+            video.pause();
+        };
+    }, [src]);
+
+    const stopNavigation = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+    };
+
+    const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+        stopNavigation(event);
+
+        const video = videoRef.current;
+        if (!video) return;
+
+        syncMuted(video);
+
+        if (video.paused) {
+            video.play().catch(() => {
+                // Ignore autoplay blocks; user gesture required in some browsers.
+            });
+        } else {
+            video.pause();
+        }
+    };
+
+    return (
+        <div className="relative h-full w-full" onClick={stopNavigation}>
+            <video
+                ref={videoRef}
+                src={src}
+                poster={poster}
+                autoPlay
+                loop
+                muted
+                preload="metadata"
+                playsInline
+                onLoadedMetadata={() => {
+                    if (!videoRef.current) return;
+                    syncMuted(videoRef.current);
+                    void attemptPlay();
+                }}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onClick={stopNavigation}
+                className="h-full w-full object-cover"
+                controls={false}
+                aria-label={`${title} preview video`}
+            />
+            {!isPlaying && (
+                <button
+                    type="button"
+                    onClick={handleToggle}
+                    className="absolute inset-0 flex items-center justify-center z-10"
+                    aria-label={`Play ${title} preview`}
+                >
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/40 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="ml-1 opacity-90">
+                            <polygon points="5,3 19,12 5,21" />
+                        </svg>
+                    </div>
+                </button>
             )}
         </div>
     );
@@ -243,22 +362,21 @@ export default function SelectedWorks({ projects }: SelectedWorksProps) {
                                                             
                                                             {/* Media Container */}
                                                             <div className="relative w-full h-full rounded-md md:rounded-[12px] overflow-hidden bg-black flex items-center justify-center shadow-inner cursor-pointer">
-                                                                <Image
-                                                                    src={imageUrl}
-                                                                    alt={project.title}
-                                                                    fill
-                                                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                                                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                                                                />
-
-                                                                {/* Play Button Overlay */}
-                                                                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-                                                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/40 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="ml-1 opacity-90">
-                                                                            <polygon points="5,3 19,12 5,21" />
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
+                                                                    {project.videoUrl ? (
+                                                                        <InlineVideoPreview
+                                                                            src={project.videoUrl}
+                                                                            poster={imageUrl}
+                                                                            title={project.title}
+                                                                        />
+                                                                    ) : (
+                                                                        <Image
+                                                                            src={imageUrl}
+                                                                            alt={project.title}
+                                                                            fill
+                                                                            sizes="(max-width: 1024px) 100vw, 50vw"
+                                                                            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                                                        />
+                                                                    )}
                                                             </div>
 
                                                         </div>

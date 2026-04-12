@@ -59,9 +59,9 @@ export default defineType({
         }),
         defineField({
             name: "videoUrl",
-            title: "Video URL (Cloudinary)",
-            type: "url",
-            description: "Cloudinary video URL for this project",
+            title: "Project Video",
+            type: "cloudinaryVideoUrl",
+            description: "Upload a video and store the Cloudinary URL.",
         }),
         defineField({
             name: "client",
