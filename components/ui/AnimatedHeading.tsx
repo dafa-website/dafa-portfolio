@@ -19,7 +19,7 @@ export default function AnimatedHeading({
     delay = 0,
 }: AnimatedHeadingProps) {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-50px" });
+    const isInView = useInView(ref, { once: false, margin: "-10px" });
 
     const letters = text.split("");
 
