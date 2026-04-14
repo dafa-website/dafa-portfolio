@@ -6,6 +6,7 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import type { Project } from "@/types";
 import { urlFor, isSanityConfigured } from "@/lib/sanity";
+import { AnimatePresence, motion } from "framer-motion";
 import { WORK_CATEGORIES_ORDER } from "@/data/home";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -60,33 +61,44 @@ function VisualProjectCarousel({
     };
 
     return (
-        <div className="relative w-full aspect-[4/3] md:aspect-[21/9] flex items-center justify-center">
-            {/* Blurred Background Copy */}
-            <Image
-                src={currentUrl}
-                alt={`${project.title} background`}
-                fill
-                className="object-cover opacity-50 blur-sm scale-110 pointer-events-none transition-opacity duration-500"
-            />
+        <div className="relative w-full aspect-[4/3] md:aspect-[21/9] flex items-center justify-center overflow-hidden">
+            <AnimatePresence>
+                <motion.div
+                    key={currentUrl}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                >
+                    {/* Blurred Background Copy */}
+                    <Image
+                        src={currentUrl}
+                        alt={`${project.title} background`}
+                        fill
+                        className="object-cover opacity-50 blur-sm scale-110 pointer-events-none"
+                    />
 
-            {/* Main Image Container */}
-            <div className="absolute inset-4 md:inset-x-[10vw] lg:inset-x-[15vw] md:inset-y-8">
-                <Image
-                    src={currentUrl}
-                    alt={project.title}
-                    fill
-                    sizes="100vw"
-                    className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-700"
-                    priority={priority}
-                />
-            </div>
+                    {/* Main Image Container */}
+                    <div className="absolute inset-4 md:inset-x-[10vw] lg:inset-x-[15vw] md:inset-y-8">
+                        <Image
+                            src={currentUrl}
+                            alt={project.title}
+                            fill
+                            sizes="100vw"
+                            className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+                            priority={priority}
+                        />
+                    </div>
+                </motion.div>
+            </AnimatePresence>
 
             {hasMultiple && (
-                <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-8">
+                <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-8 pointer-events-none">
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60"
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60 cursor-pointer pointer-events-auto"
                         aria-label="Previous image"
                     >
                         <ChevronLeft size={18} />
@@ -94,7 +106,7 @@ function VisualProjectCarousel({
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60"
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-black/60 cursor-pointer pointer-events-auto"
                         aria-label="Next image"
                     >
                         <ChevronRight size={18} />
