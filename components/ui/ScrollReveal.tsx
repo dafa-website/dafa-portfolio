@@ -43,10 +43,10 @@ export default function ScrollReveal({
     variant = "fade-up",
     delay = 0,
     duration = 0.7,
-    once = true,
+    once = false,
 }: ScrollRevealProps) {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once, margin: "-60px" });
+    const isInView = useInView(ref, { once, margin: "-10px" });
 
     return (
         <motion.div
