@@ -8,7 +8,6 @@ export const NAV_LINKS = [
 
 export const FOOTER_LINKS = [
   { label: "Works", href: "#works" },
-  { label: "Reel", href: "#reel" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "/contact" },
 ] as const;
