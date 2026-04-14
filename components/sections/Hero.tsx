@@ -128,7 +128,8 @@ export default function Hero({
                     {/* Display name */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-10px" }}
                         transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <h1
@@ -146,7 +147,8 @@ export default function Hero({
                     {/* Tagline */}
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-10px" }}
                         transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="mt-7 text-lg font-medium tracking-wide text-white/90 sm:text-xl md:text-2xl"
                     >
@@ -156,7 +158,8 @@ export default function Hero({
                     {/* Bio + stats */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-10px" }}
                         transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         className="mt-8 max-w-xl"
                     >
@@ -169,7 +172,8 @@ export default function Hero({
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-10px" }}
                         transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
                         className="mt-10 flex flex-col gap-4 sm:flex-row"
                     >
