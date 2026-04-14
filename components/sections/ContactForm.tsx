@@ -104,6 +104,7 @@ export default function ContactForm() {
                   Select budget
                 </option>
                 <option value="< Rp1.000.0000">&lt; Rp1.000.000</option>
+                <option value="Rp5.000.000 - Rp10.000.000">Rp1.000.000 - Rp5.000.000</option>
                 <option value="Rp5.000.000 - Rp10.000.000">Rp5.000.000 - Rp10.000.000</option>
                 <option value="> Rp10.000.000">&gt; Rp10.000.000</option>
               </select>
