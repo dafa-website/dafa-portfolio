@@ -43,7 +43,7 @@ export default function ScrollReveal({
     variant = "fade-up",
     delay = 0,
     duration = 0.7,
-    once = false,
+    once = true,
 }: ScrollRevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once, margin: "-10px" });
