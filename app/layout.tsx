@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat, Fraunces } from "next/font/google";
 import "./globals.css";
-
-const montserrat = Montserrat({
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
@@ -45,6 +45,8 @@ export default function RootLayout({
       >
         <div className="grain-overlay" />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
